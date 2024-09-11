@@ -176,6 +176,7 @@
     </div>
 </section> -->
 
+
 <section data-background-iframe="../../../assets/viz/gradient/">
     <p class="title" style="font-size: 50px;">Landscape of Privacy and Security Countermeasures and Open Problems</p>
     <br>
@@ -609,8 +610,10 @@
     <h2 class="r-fit-text">Summary of FHE-based Search solutions</h2>
     <br>
     <br>
-    <lu>Computational complexity $\mathcal{O}\left( K \cdot \left( \#\mathrm{M}_{\mathrm{HE}} + \#\mathrm{R}_{\mathrm{HE}} + \#\mathrm{A}_{\mathrm{HE}} \right) \right)$</lu>    
-    <div id="center" style="width:100%;">
+    <lu>Computational complexity $\mathcal{O}\left( K \cdot \left( \#\mathrm{M}_{\mathrm{HE}} + \#\mathrm{R}_{\mathrm{HE}} + \#\mathrm{A}_{\mathrm{HE}} \right) \right)$</lu>  
+    <div id="center" style="transform: scale(1.5);">
+        <br>  
+        <br>  
         <img src="../assets/images/talks/part3/complexityComp.svg" width="100%">
     </div>
 </section>
@@ -632,31 +635,29 @@
 
 <section>
     <h2 class="r-fit-text">Effect of the dimensionality reduction on search runtime</h2>
-    <center><div id='myDiv1' style="width:100%;"></div></center>
-    <!-- <ul style="font-size: 40%;"></ul> -->
-
+    <center><div id='myDiv1' style="transform: scale(1.1);"></div></center>
         <script>
-        var xlabels = ["128", "192", "256", "512"];
+        var xlabels = ["16", "32" , "64" , "128", "192", "256", "512"];
         var trace1 = {
             type: 'bar',
             x: xlabels,
-            y: [9.35, 14.55, 19.46, 38.37],
-            name: 'HERS',
+            y: [1.29, 2.39, 4.65, 9.35, 14.55, 19.46, 38.37],
+            name: 'HERS <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9678986&casa_token=y33rj9oKjqIAAAAA:RyFr38E-SE43NkqYuG00M7dJWyB8GaA7OZ_rrGHLqj3G0ynIOccxVQtFFq_9_P4TNuwISk6biDw&tag=1">[EJB22]</a>',
             marker: {
                 color: '#A2C8A2',
             },
-            text: [9.35, 14.55, 19.46, 38.37],  
+            text: [1.29, 2.39, 4.65, 9.35, 14.55, 19.46, 38.37],  
             textposition: 'auto'  
         };
         var trace2 = {
             type: 'bar',
             x: xlabels,
-            y: [0.62, 0.88, 1.22139, 1.28],
-            name: 'MFIP-based search',
+            y: [0.07, 0.17, 0.49, 0.62, 0.88, 1.22139, 1.28],
+            name: 'MFIP-based search <a href="https://research.utwente.nl/en/publications/fast-and-accurate-biometric-search-under-encryption">[B23]</a>',
             marker: {
                 color: '#C8A2C8'
             },
-            text: [0.62, 0.88, 1.22, 1.28],  
+            text: [0.07, 0.17, 0.49, 0.62, 0.88, 1.22, 1.28],  
             textposition: 'auto' 
         };
 
@@ -665,7 +666,7 @@
         var config = {responsive: true, displaylogo: false};
         
         var layout = {
-            title: '(One-to-OneMillion) Search runtime measured on the same machine over 12 parallel cores for 128 bits security',
+            title: '<span style="color:orange;">(1:1M)</span> Search runtime measured on the same machine over 12 parallel cores for 128 bits security',
             font: {size: 12, color: "#FFFFFF"},
             plot_bgcolor:"#333333",
             paper_bgcolor:"#333333",
@@ -701,7 +702,12 @@
         };        
         Plotly.newPlot('myDiv1', data, layout, config);
     </script>
-    
+
+    <ul id="center">
+        <a style="font-size: 40%;" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9678986&casa_token=y33rj9oKjqIAAAAA:RyFr38E-SE43NkqYuG00M7dJWyB8GaA7OZ_rrGHLqj3G0ynIOccxVQtFFq_9_P4TNuwISk6biDw&tag=1">[EJB22] HERS: Homomorphically Encrypted Representation Search</a>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a style="font-size: 40%;" href="https://research.utwente.nl/en/publications/fast-and-accurate-biometric-search-under-encryption">[B23] Fast and Accurate Biometric Search under Encryption</a>
+    </ul>
+
+
 </section>
 
 
