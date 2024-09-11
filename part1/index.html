@@ -1,0 +1,1264 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Part 1: Biometrics System Background</title>
+        <meta name="author" content="Vishnu Boddeti">
+
+        <link rel="stylesheet" href="../../assets/revealjs/dist/reset.css">
+        <link rel="stylesheet" href="../../assets/revealjs/dist/reveal.css">
+        <link rel="stylesheet" href="../../assets/revealjs/dist/theme/vishnu.css" id="theme">
+        <link rel="stylesheet" href="../../assets/revealjs/plugin/highlight/monokai.css" id="highlight-theme">
+
+        <!-- tikzjax -->
+        <link rel="stylesheet" type="text/css" href="../../assets/tikzjax/fonts.css">
+        <script src="../../assets/tikzjax/tikzjax.js"></script>
+
+        <!-- CDN for plotly and fontawesome -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://kit.fontawesome.com/7a9386c7a8.js" crossorigin="anonymous"></script>
+
+        <!-- Theme used for syntax highlighted code -->
+        <style>
+            .reveal code,
+            .reveal .formula-source,
+            .reveal a {
+                color: #3F988E;
+            }
+            .reveal code {
+                padding: 0 0.25em;
+            }
+            .reveal pre.formula-source {
+                box-shadow: none;
+                font-size: 0.8em;
+            }
+            .reveal .formula,
+            .reveal .formula-source {
+                margin: 2.5rem 0;
+            }
+            .reveal li {
+                margin: 0.65em 0;
+            }
+            .reveal .formula.bigger {
+                font-size: 1.8em;
+            }
+
+            /*https://medium.com/@mandieq/beautiful-presentations-from-markdown-who-knew-it-could-be-so-easy-d279aa7f787a*/
+
+            #left {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                float: left;
+                z-index:-10;
+                font-size: 0.85em;
+                line-height: 1.5;
+            }
+
+            #right {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                float: right;
+                z-index:-10;
+                font-size: 0.85em;
+                line-height: 1.5;
+            }
+
+            #center {
+                margin-left: auto;
+                margin-right: auto;
+                float: center;
+                text-align: center;
+                z-index:-10;
+                font-size: 0.85em;
+                line-height: 1.5;
+            }
+
+            #alert {
+                background-color: #ff9800;
+                padding: 10px;
+            }
+
+            #customers {
+              border-collapse: collapse;
+              width: 100%;
+            }
+            #customers td, #customers th {
+              border: 1px solid #ddd;
+              padding: 8px;
+            }
+            /*#customers tr:nth-child(even){background-color: #f2f2f2;}*/
+            #customers tr:hover {background-color: #000000;}
+            #customers th {
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: #4CAF50;
+              color: white;
+            }
+
+            #mytable {
+              border-collapse: collapse;
+              width: 100%;
+            }
+            #mytable td, #mytable th {
+              border: 1px solid #ddd;
+              padding: 8px;
+            }
+            /*#mytable tr:nth-child(even){background-color: #f2f2f2;}*/
+            #mytable tr:hover {background-color: #000000;}
+            #mytable th {
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              color: white;
+            }
+
+            .box {
+              width: 100%;
+              background-color: #333333;
+              border: 2px solid #ccc;
+              border-radius: 5px;
+              padding: 0px;
+              margin: 0px;
+              color:#eeeeec;
+            }
+          
+            .box-header {
+              background-color: #337ab7;
+              color: #fff;
+              padding: 5px;
+              border-radius: 5px 5px 0 0;
+            }
+
+            .red-box-header {
+              background-color: indianred;
+              color: #fff;
+              padding: 5px;
+              border-radius: 5px 5px 0 0;
+            }
+
+            .green-box-header {
+              background-color: #BAB86C;
+              color: black;
+              padding: 5px;
+              border-radius: 5px 5px 0 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+                <!-- Color ramp: ["#559EB1", "#6DB28B", "#8CBB68", "#AFBD4F", "#CFB541", "#E39B39", "#E56E30"] -->
+
+<!-- <section>
+    <p class="title">Biometrics System Background</p>
+    <p class="subtitle"> IJCB Tutorial </p>
+    <p class="date">September 15, 2024</p>
+
+    <div id="left" style="width:50%;">
+        <img width=160 class="mr-3" src="/assets/images/organizers/cropped-amina-bassit.jpg">
+        <figcaption style="text-align: center;"> <a href="https://hal.cse.msu.edu">Amina Bassit</a></figcaption>
+    </div>
+    <div id="left" style="width:50%;">
+        <img width=160 class="mr-3" src="/assets/images/organizers/cropped-vishnu-boddeti.jpg">
+        <figcaption style="text-align: center;"> <a href="https://hal.cse.msu.edu">Vishnu Boddeti</a></figcaption>
+    </div>
+</section> -->
+
+<section data-background-iframe="../../../assets/viz/gradient/">
+    <p class="title">Biometrics System Background</p>
+    <p class="subtitle"> IJCB Tutorial </p>
+    <p class="date">September 15, 2024</p>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Traditional Biometric Recognition</h2>
+    <br>
+    <br>
+    <center class="r-fit-text"><a style="color: rgb(255,128,0);">Traditional</a> recognition systems rely on the extraction of <a style="color: rgb(255,128,0);">handcrafted</a> features.</center>
+    <br>
+    <br>
+    <div id="images-container" style="display: flex; justify-content: center;">
+        <div class="fragment" data-fragment-index="1" id="left" style="width: 160px; text-align: center; margin-right: 20px;">
+            <img width=160 class="mr-3" src="../assets/images/talks/part1/geometrical-facial-features.png">
+            <figcaption style="font-size: 70%;">Geometrical Facial Features</figcaption>
+        </div>
+        <div class="fragment" data-fragment-index="2" id="center" style="width: 160px; text-align: center; margin-right: 20px;">
+            <img width=160 class="mr-3" src="../assets/images/talks/part1/minutiae.png">
+            <figcaption style="font-size: 70%;">Minutiae Features</figcaption>
+        </div>
+        <div class="fragment" data-fragment-index="3" id="right" style="width: 250px; text-align: center;">
+            <img width=250 class="mr-3" src="../assets/images/talks/part1/iriscode.png">
+            <figcaption style="font-size: 70%;">Iriscode features</figcaption>
+        </div>
+    </div>
+    <div id="left">
+        <ul style="font-size: 40%;">Sources: <a href="https://link.springer.com/chapter/10.1007/3-540-55426-2_90"> Face</a>, <a href="https://hugefiles.comp.hkbu.edu.hk/album/web/other/wsb2022/slides/Davide_Maltoni.pdf"> Minutiae</a>, <a href="https://opg.optica.org/view_article.cfm?pdfKey=f43d8c65-4e0e-4331-964104ac1b23d25e_195945"> Iriscode</a> </ul>
+    </div>
+
+</section>
+
+<section>
+    <h2 class="r-fit-text">Traditional Biometric Recognition Pipeline</h2>
+    <br>
+    <br>
+    <br>
+    <div class="r-stack">
+        <img class="fragment current-visible" data-fragment-index="1" src="../assets/images/talks/part1/traditionalRecognitionOverview-1.svg" width="100%">  
+        <img class="fragment current-visible" data-fragment-index="2" src="../assets/images/talks/part1/traditionalRecognitionOverview-2.svg" width="100%">     
+    </div>
+    <br>
+    <br>
+    <blockquote class="fragment" data-fragment-index="2" style="font-weight: bold; background-color: rgba(255, 128, 0, 0.572);border-radius: 10px;">Pre-processing and feature extraction differ per modality</blockquote>
+</section>
+
+
+<section>
+    <h2 class="r-fit-text">Traditional Face Recognition</h2>
+    <br>
+    <div id="left" style="width:40%;">
+        <img src="../assets/images/talks/part1/Horizontal and vertical edge dominance maps.png" width="80%">        
+        <img src="../assets/images/talks/part1/geometrical-facial-features.png" width="50%">    
+        <br>
+        <ul style="font-size: 40%;">Source: <a href="https://link.springer.com/chapter/10.1007/3-540-55426-2_90"> Face</a></ul>
+    </div>
+    <div id="right" style="width:60%;">
+        <ul>
+            <li class="fragment" data-fragment-index="1">Pre-processing and feature extraction</li>
+            <ul class="fragment" data-fragment-index="1" style="font-size:80%">
+                <li>Face detection</li>
+                <li>Face alignment</li>
+                <li>Normalization</li>
+                <li>Extraction of handcrafted features: i.e., eigenfaces, fisherfaces, local binary patterns, Gabor filters</li>
+            </ul>
+            <li class="fragment" data-fragment-index="2">Comparison</li>
+            <ul class="fragment" data-fragment-index="2" style="font-size:80%">
+                <li>Distance-based comparison: i.e., Euclidean distance </li>
+                <li>Classifier-based comparison: i.e., Support Vector Machines (SVM) </li>
+            </ul>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Traditional Fingerprint Recognition</h2>
+    <br>
+    <div id="left" style="width:50%;">
+        <img src="../assets/images/talks/part1/fingerprint1.png" width="100%">        
+        <img src="../assets/images/talks/part1/fingerprint2.png" width="100%">    
+        <br>
+        <ul style="font-size: 40%;">Source: <a href="https://hugefiles.comp.hkbu.edu.hk/album/web/other/wsb2022/slides/Davide_Maltoni.pdf"> Minutiae</a></ul>
+    </div>
+    <div id="right" style="width:50%;">
+        <ul>
+            <li class="fragment" data-fragment-index="1">Pre-processing and feature extraction</li>
+            <ul class="fragment" data-fragment-index="1" style="font-size:80%">
+                <li>Fingerprint segmentation</li>
+                <li>Local ridge orientation and frequency</li>
+                <li>Fingerprint image binarization and thinning</li>
+                <li>Detection and extraction of minutiae points</li>
+            </ul>
+            <li class="fragment" data-fragment-index="2">Comparison</li>
+            <ul class="fragment" data-fragment-index="2" style="font-size:80%">
+                <li>Minutiae-based comparison: i.e., global minutiae-based approach and Minutia Cylinder-Code</li>
+            </ul>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Traditional Iris Recognition</h2>
+    <br>
+    <div id="left" style="width:40%;">
+        <img src="../assets/images/talks/part1/traditional-irisRec.png" width="100%">  
+        <br>
+        <ul style="font-size: 40%;">Source: <a href="https://opg.optica.org/view_article.cfm?pdfKey=f43d8c65-4e0e-4331-964104ac1b23d25e_195945"> Iriscode</a></ul>      
+    </div>
+    <div id="right" style="width:60%;">
+        <ul>
+            <li class="fragment" data-fragment-index="1">Pre-processing and feature extraction</li>
+            <ul class="fragment" data-fragment-index="1" style="font-size:80%">
+                <li>Iris segmentation</li>
+                <li>Masking iris texture region</li>
+                <li>Unwrapping the iris image</li>
+                <li>Extraction of iris code</li>
+            </ul>
+            <li class="fragment" data-fragment-index="2">Comparison</li>
+            <ul class="fragment" data-fragment-index="2" style="font-size:80%">
+                <li>Iris is sensitive to iris rotation angle that varies from capturing to the other.</li>
+                <li>As mitigation, iris comparison requires calculating the minimum Hamming distance between the $1^{\text{st}}$ iris code and $n$ circular shiftings of the $2^{\text{nd}}$ iris code to the left and another $n$ shiftings to the right.</li>
+            </ul>
+        </ul>
+    </div>
+</section>
+
+
+<section>
+    <h2 class="r-fit-text">Limitations of Traditional Recognition Systems</h2>
+    <br>    
+    <ul>
+        <ul>
+            <li class="fragment">Handcrafted features capture only <a style="color: rgb(255,128,0);">obvious patterns</a></li>
+            <li class="fragment">Pre-processing and feature extraction are <a style="color: rgb(255,128,0);">separate</a> procedures</li>
+            <li class="fragment">Each modality follows a specific processing and comparison</li>
+            <ul>
+                <li class="fragment">Failure to capture the <a style="color: rgb(255,128,0);">diversity</a> of facial features</li>
+                <li class="fragment"><a style="color: rgb(255,128,0);">Variation</a> of minutiae points per fingerprint.</li>
+                <li class="fragment"><a style="color: rgb(255,128,0);">$2n+1$ dissimilarity measures</a> for one iris comparison.</li>
+            </ul>
+        </ul>        
+    </ul>
+    <br>
+    <blockquote class="fragment" style="font-weight: bold; background-color: rgba(255, 128, 0, 0.572);border-radius: 10px;">Those limitations affect the overall biometric recognition accuracy</blockquote>
+</section>
+
+
+<section>
+    <h2 class="r-fit-text">Deep Learning-based Biometric Recognition</h2>
+    <br>
+    <br>    
+    <div class="r-stack">
+        <img class="fragment current-visible" data-fragment-index="1" src="../assets/images/talks/part1/dl-basedRec-1.svg" width="100%">
+        <img class="fragment current-visible" data-fragment-index="2" src="../assets/images/talks/part1/dl-basedRec-2.svg" width="100%">
+        <img class="fragment" data-fragment-index="3" src="../assets/images/talks/part1/dl-basedRec-3.svg" width="100%">
+    </div>
+    <blockquote class="fragment" data-fragment-index="3" style="font-weight: bold; background-color: rgba(255, 128, 0, 0.572);border-radius: 10px;">DL unified biometrics processing across modalities</blockquote>
+    <!-- <ul>Deep learning has unified biometric recognition processing across modalities into one major pipeline, leading to</ul> -->
+    <ul class="fragment" data-fragment-index="4">
+        <ul style="font-size: 80%;"> 
+            <li class="fragment">Extraction of <a style="color: rgb(255,128,0);">distinctive features</a></li>
+            <li class="fragment"><a style="color: rgb(255,128,0);">Fixed-length</a> numerical representation</li>
+            <li class="fragment"><a style="color: rgb(255,128,0);">On-the-fly comparison</a> for all modalities</li>
+        </ul>        
+    </ul>
+</section>
+
+
+<section>
+    <h2 class="r-fit-text">Some DL-based Biometric Recognition Solutions</h2>
+    <div class="fragment" data-fragment-index="1" id="left" style="width: 50%;">
+        <img src="../assets/images/talks/part1/DeepFace.png" width="90%">
+        <ul id="center"><a href="https://openaccess.thecvf.com/content_cvpr_2014/papers/Taigman_DeepFace_Closing_the_2014_CVPR_paper.pdf">DeepFace</a></ul>
+    </div>
+    <div class="fragment" data-fragment-index="2" id="left" style="width: 50%;">
+        <img src="../assets/images/talks/part1/ComplexIrisNet.png" width="90%">
+        <ul id="center"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9721052">ComplexIrisNet</a></ul>
+    </div>
+
+    <div class="fragment" data-fragment-index="3" id="center" style="width: 70%;">
+        <img src="../assets/images/talks/part1/DeepPrint.png" width="100%">
+        <ul id="center"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8937828&casa_token=81Ol5n6mGSwAAAAA:_ZWMSJF67HlSo4PWXfw-KRuWQJk6I1lxpQDacqRERrXTpO11zFBeQYscN3MLP6yWzshAMmKfv_c">DeepPrint</a></ul>
+    </div>
+
+</section>
+
+
+<section>
+    <h2 class="r-fit-text">Biometric recognition tasks</h2>
+    <br>
+    <br>
+    <div class="r-stack">
+        <img class="fragment current-visible" data-fragment-index="1"  src="../assets/images/talks/part1/recTasks-1.svg" width="100%">   
+        <img class="fragment" data-fragment-index="2" src="../assets/images/talks/part1/recTasks-2.svg" width="100%">     
+    </div>
+    <br>
+    <br>
+    <center><a class="fragment" data-fragment-index="1" style="color: rgb(254, 124, 206);">Verification</a> <a style="color: white;" class="fragment" data-fragment-index="1">(1:1 comparison)</a> <a style="color: white;" class="fragment" data-fragment-index="2">and</a> <a class="fragment" data-fragment-index="2" style="color: rgb(255,128,0);">Search</a> <a style="color: white;" class="fragment" data-fragment-index="2">(1:N comparison)</a></center>
+</section>
+
+
+<section>
+    <h2 class="r-fit-text">Biometric <a style="color: rgb(254, 124, 206);">Verification</a> task (1:1 comparison)</h2>
+    <div class="r-stack">
+        <img class="fragment current-visible" data-fragment-index="1" src="../assets/images/talks/part1/verification-0.svg" width="100%">  
+        <img class="fragment current-visible" data-fragment-index="2" src="../assets/images/talks/part1/verification-1.svg" width="100%">      
+        <img class="fragment current-visible" data-fragment-index="3" src="../assets/images/talks/part1/verification-2.svg" width="100%">  
+        <img class="fragment" data-fragment-index="4" src="../assets/images/talks/part1/verification-3.svg" width="100%">  
+    </div>
+    <blockquote class="fragment" data-fragment-index="4" style="background-color: rgb(151, 73, 123);border-radius: 10px;"><em>Do the reference and probe templates belong to the same identity?</em></blockquote>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Verification Performance Assessment</h2>
+    <div id="left" style="width:50%;">
+        <img class="fragment" data-fragment-index="1" src="../assets/images/talks/part1/DETcurve.svg" width="100%">
+    </div>
+    <div id="right" style="width:50%;">
+        <ul>
+            <li class="fragment" data-fragment-index=0>Verification is assessed by measuring </li>
+            <ul>
+                <li class="fragment" data-fragment-index=0>False Match Rate (FMR)</li>
+                <li class="fragment" data-fragment-index=0>False Non-Match Rate (FNMR)</li>
+                <li class="fragment" data-fragment-index=0>Equal Error Rate (EER)</li>
+            </ul>
+        </ul>
+    </div>
+    <div id="left" style="width:100%;">
+        <ul>
+            <li class="fragment" data-fragment-index="1">Verification performance can be visualized by the DET curve</li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Biometric <a style="color: rgb(255,128,0);">Search</a> task (1:N comparison)</h2>
+    <div class="r-stack">
+        <img class="fragment current-visible" data-fragment-index="1" src="../assets/images/talks/part1/search-0.svg" height="100%">  
+        <img class="fragment current-visible" data-fragment-index="2" src="../assets/images/talks/part1/search-1.svg" height="100%">
+        <img class="fragment current-visible" data-fragment-index="3" src="../assets/images/talks/part1/search-2.svg" height="100%"> 
+        <img class="fragment current-visible" data-fragment-index="4" src="../assets/images/talks/part1/search-3.svg" height="100%"> 
+        <img class="fragment" data-fragment-index="5" src="../assets/images/talks/part1/search-4.svg" height="100%">        
+    </div>
+    <blockquote class="fragment" data-fragment-index="4" style="background-color: rgba(255, 128, 0, 0.572);border-radius: 10px;"><em style="color: rgb(255, 255, 255);">Does this probe template belong to the reference DB?</em></blockquote>
+</section>
+
+
+
+
+<section>
+    <h2 class="r-fit-text">Search Performance Assessment</h2>
+    <div id="left" style="width:40%;">
+        <img class="fragment" data-fragment-index="0" src="../assets/images/talks/part1/CMCcurve.svg" width="70%">
+        <img class="fragment" data-fragment-index="1" src="../assets/images/talks/part1/DETcurve-identification.svg" width="70%">
+    </div>
+    <div id="right" style="width:60%;">
+        <ul>
+            <li style="font-size:90%">Search performance depends on the scenario</li>
+            <ul>
+                <li class="fragment" data-fragment-index=0 style="font-size:90%">Closed-set scenario</li>
+                    <ul>  
+                        <li class="fragment" data-fragment-index=0 style="font-size:80%"> Number of times the probe's identity appears in the list of potential candidates</li>
+                        <li class="fragment" data-fragment-index=0  style="font-size:80%"> Visualized by the Cumulative Match Curve (CMC)</li>
+                    </ul>
+                <li class="fragment" data-fragment-index=1 style="font-size:90%">Open-set scenario</li>
+                    <ul>
+                        <li class="fragment" data-fragment-index=1 style="font-size:80%">False Positive Identification Rate (FPIR)</li>
+                        <li class="fragment" data-fragment-index=1 style="font-size:80%">False Non-Identification Rate (FNIR)</li>
+                        <li class="fragment" data-fragment-index=1 style="font-size:80%">Equal Error Rate (EER)</li>
+                        <li class="fragment" data-fragment-index=1 style="font-size:80%">Visualized by the DET curve for identification</li>
+                    </ul>
+            </ul>
+        </ul>
+    </div>
+    <div id="left" style="width:100%;">
+        <ul>
+            <!-- <li class="fragment" data-fragment-index="1">Identification performance can be visualized by the CMC and DET curves</li> -->
+        </ul>
+    </div>
+</section>
+
+
+
+<section>
+    <h2 class="r-fit-text">Effect of DL on biometric recognition performance </h2>
+    <div>
+        <ul class="r-fit-text">
+            <ul>
+                <li class="fragment">DL combines pre-processing and feature extractor in single inference.</li> 
+                <li class="fragment">DL-based feature vectors are distinctive fixed-length representations.</li> 
+                <li class="fragment">Single vector-based comparison for all modalities.</li>
+                <li class="fragment">DL performance surpasses traditional handcrafted methods.</li>
+                <ul>
+                    <li class="fragment">Face recognition accuracy from <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8612837&casa_token=y8mGrriA-FAAAAAA:ANQyNX_h8ImM_rtyUcb6kQlH65kNgh1TEjsk89IsEPQS-tbrz1waHuoYmIyd8b_jJge2C_Vqz50&tag=1">$78.8\%$</a> to <a href="https://openaccess.thecvf.com/content/WACV2023/papers/Bae_DigiFace-1M_1_Million_Digital_Face_Images_for_Face_Recognition_WACV_2023_paper.pdf">$\sim99.8\%$</a></li>
+                    <li class="fragment">Fingerprint recognition accuracy from <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5325773&casa_token=fPT997kKMwgAAAAA:Cse3a-XvlqbjGLJJT8_O2TX45iiVIhAcCAP4Xh7FyxLV_N939GOpzEiTGzc0O-38BPG8YTd-wy0">$92.6\%$</a> to <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8937828&casa_token=81Ol5n6mGSwAAAAA:_ZWMSJF67HlSo4PWXfw-KRuWQJk6I1lxpQDacqRERrXTpO11zFBeQYscN3MLP6yWzshAMmKfv_c">$98.55\%$</a></li>
+                    <li class="fragment">Iris recognition accuracy from <a href="https://link.springer.com/article/10.1007/s11277-017-5153-8">$97.5\%$</a> to <a href="https://link.springer.com/article/10.1007/s11042-022-13098-2">$99.70\%$</a></li>
+                </ul>
+            </ul>            
+        </ul>
+    </div>
+</section>
+
+
+<section>
+    <h2 style="font-size: 200%;">Takeaways of this part</h2>
+    <ul class="r-fit-text">
+        <ul>
+            <li class="fragment">Traditional handcrafted features are <a style="color: rgb(255,128,0);">less reliable.</a></li>
+            <li class="fragment">DL <a style="color: rgb(255,128,0);">enhances the performance</a> compared to traditional ones.</li>
+            <li class="fragment">DL <a style="color: rgb(255,128,0);">unifies biometric processing and comparison</a> for all modalities.</li>
+            <li class="fragment">Main biometric tasks are <a style="color: rgb(255,128,0);">verification and search</a>.</li>
+            <li class="fragment">Performance assessment is <a style="color: rgb(255,128,0);">essential to avoid poor biometric systems</a> with security issues.</li>            
+        </ul>
+    </ul>
+</section>
+
+<!-- <section>
+    <h2 style="font-size: 200%;">References of this part</h2>
+    <br>
+    <ul>
+        <ul style="font-size: 60%;">
+            <li>Brunelli, R., & Poggio, T. (1992). Face recognition through geometrical features. In Computer Vision—ECCV'92: Second European Conference on Computer Vision Santa Margherita Ligure, Italy, May 19–22, 1992 Proceedings 2 (pp. 792-800). Springer Berlin Heidelberg.</li>
+            <li>Ashok, A., & Neifeld, M. A. (2010). Point spread function engineering for iris recognition system design. Applied optics, 49(10), B26-B39.</li>
+            <li>Maltoni, D., & Cappelli, R. (2008). Fingerprint recognition. In Handbook of biometrics (pp. 23-42). Boston, MA: Springer US.</li>
+        </ul>
+    </ul>
+</section> -->
+
+<!-- <section>
+    <h2 class="r-fit-text">Homomorphic Encryption: The Holy Grail?</h2>
+    <ul style="font-size:75%">
+        <li>Cryptographic scheme needs to allow computations directly on the encrypted data.</li>
+        <ul>
+            <li class="fragment" data-fragment-index="0">Solution: Homomorphic Encryption</li>
+            <li class="fragment" data-fragment-index="0">Attractive Property: Conjectured to be <span style="color:limegreen">post-quantum secure</span> for appropriate choice of encryption parameters.</li>
+        </ul>
+    </ul>
+    <div id="left" style="width:60%">
+        <img class="fragment" data-fragment-index="0" src="../assets/images/talks/fhe-computations.svg" width="100%">
+    </div>
+    <div id="right" style="width:40%">
+        <br><br>
+        <ul style="color:orange" class="fragment" data-fragment-index="1"><li>Limitations: only supports additions and multiplications.</li></ul>
+    </div>
+</section> -->
+
+<!-- <section>
+    <h2 class="r-fit-text">Simplified Idea of Homomorphic Encryption</h2>
+    <blockquote>RLWE: Ring Learning with Errors</blockquote>
+    <div class="r-stack">
+        <img class="fragment" data-fragment-index=0 src="../assets/images/talks/rlwe-1.svg">
+        <img class="fragment" data-fragment-index=1 src="../assets/images/talks/rlwe-2.svg">
+        <img class="fragment" data-fragment-index=2 src="../assets/images/talks/rlwe-3.svg">
+    </div>
+
+    <table id="mytable" class="fragment" data-fragment-index=3 style="width:50%;font-size:75%">
+        <tr style="background-color:black">
+            <th>op</th>
+            <th>plaintext</th>
+            <th>ciphertext</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td>$x$</td>
+            <td>$(x + e_1) \mbox{ mod } t$</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>$y$</td>
+            <td>$(y + e_2) \mbox{ mod } t$</td>
+        </tr>
+        <tr>
+            <td>$+$</td>
+            <td>$x+y$</td>
+            <td>$(x+y + e_3') \mbox{ mod } t$</td>
+        </tr>
+        <tr>
+            <td>$\times$</td>
+            <td>$x\times y$</td>
+            <td>$(x\times y + e_4'') \mbox{ mod } t$</td>
+        </tr>
+    </table>
+</section> -->
+<!-- 
+<section>
+    <h2 class="r-fit-text">Existing Applications of FHE for Biometric Security</h2>
+    <img src="../assets/images/talks/biometric-attacks-3.svg" width="60%">
+    <ul style="font-size:75%">
+        <li>Template protection using Homomorphic Encryption:</li>
+        <ul>
+            <li class="fragment">Encrypt database of features.</li>
+            <li class="fragment"> Encrypt query feature.</li>
+            <li class="fragment">Match score computed directly in encrypted domain.</li>
+        </ul>
+    </ul>
+</section>
+
+<section data-background="white">
+    <h2 style="color:black;" class="r-fit-text">Prior Work: Template Protection with Homomorphic Encryption</h2>
+    <div id="left" style="width:50%">
+        <figure><img src="../assets/images/talks/secure-face-matching-overview.svg" width="80%"></figure>
+        <ul style="font-size:60%;color:black">
+            <li style="font-size:50%;">Boddeti, "Secure Face Matching Using Fully Homomorphic Encryption," BTAS 2018</li>
+        </ul>
+        <br>
+        <figure><img src="../assets/images/talks/2022-ijcb-multiplication-free-encrypted-matching.png" width="80%"></figure>
+        <ul style="font-size:60%;color:black">
+            <li style="font-size:50%;">Bassit et.al, "Multiplication-Free Biometric Recognition for Faster Processing under Encryption," IJCB 2022</li>
+        </ul>
+    </div>
+    <div id="right" style="width:50%">
+        <figure><img src="../assets/images/papers/2022-tbiom-hers-encrypted-image-search.webp" width="90%"></figure>
+        <ul style="font-size:60%;color:black">
+            <li style="font-size:50%;">Engelsma, Jain, Boddeti, "HERS: Homomorphically Encrypted Representation Search," TBIOM 2022</li>
+        </ul>
+        <figure><img src="../assets/images/talks/faster-secure-face-matching.png" width="50%"></figure>
+        <ul style="font-size:60%;color:black">
+            <li style="font-size:50%;">Bauspie&szlig; et.al, "Improved Homomorphically Encrypted Biometric Identification Using Coefficient Packing," IWBF 2022</li>
+        </ul>
+    </div>
+</section>
+
+<section data-background="#511EA8">
+    <h2>CITeR Project</h2>
+    <center>Biometric Template Fusion: Aug 2021-Aug 2022</center>
+    <center>Biometric Score and Decision Fusion: 2023-Present</center>
+</section>
+
+<section data-background="white">
+    <h2  style="color:black;">Fusion of Biometric Information</h2>
+    <div id="left" style="width:50%;color:black">
+        <br><br>
+        <center>
+            <figure><img src="../assets/images/talks/2022-ijcb-fusion-1.jpg" width="90%"></figure>
+            <figurecaption style="font-size:50%">"A comprehensive overview of biometric fusion."Information Fusion, 2019"</figurecaption>
+        </center>
+        <br><br>
+        <center><span style="color:red" class="fragment">CITeR Project Focus: Template Fusion</span></center>
+    </div>
+    <div id="left" style="width:50%;color:black">
+        <center>
+            <figure><img src="../assets/images/talks/2022-ijcb-fusion-2.png" width="90%"></figure>
+            <figurecaption style="font-size:50%">"Deep learning approach for multimodal biometric recognition system based on fusion of iris, face, and finger vein traits." Sensors, 2020</figurecaption>
+        </center>
+    </div>
+</section> -->
+
+<!-- <section>
+    <h2>Biometric Features</h2>
+    <ul style="font-size:75%">
+        <li><u>Learned Features:</u>
+        <center><img src="../assets/images/talks/representation-learning.svg" width="50%"></center>
+        </li>
+    </ul>
+    <div id="left" style="width:50%;">
+        <span class="fragment">
+            <center><u>Enrollment</u></center>
+            <center><img src="../assets/images/talks/hers-enrollment.svg" width="60%"></center>
+        </span>
+    </div>
+    <div id="right" style="width:50%;">
+        <span class="fragment">
+            <center><u>Authentication</u></center>
+            <center><img src="../assets/images/talks/hers-authentication.svg" width="80%"></center>
+        </span>
+    </div>
+</section> -->
+<!-- 
+<section data-background="white">
+    <h2 class="r-fit-text" style="color:black;">Privacy Attacks from Features</h2>
+    <div id="center" style="width:100%;color:black">
+        <center>            
+            <figurecaption style="font-size:70%">Attacks on face features</figurecaption>
+            <figure><img src="../assets/images/talks/template-attack-1.png" width="60%"></figure>
+            <figurecaption style="font-size:50%">"Assessing Privacy Risks from Feature Vector Reconstruction Attacks," arXiv:2202.05760</figurecaption>
+        </center>
+    </div>
+    <br>
+    <div id="left" style="width:50%;color:black">
+        <center>
+            <span class="fragment" data-fragment-index="0">
+            <figurecaption style="font-size:70%">Face reconstruction from template</figurecaption>
+            <figure><img src="../assets/images/talks/reconstruction-from-feature.svg" width="60%"></figure>
+            <figurecaption style="font-size:50%">"On the reconstruction of face images from deep face templates," TPAMI, 2018</figurecaption>
+            </span>
+        </center>        
+    </div>
+    <div id="right" style="width:50%;color:black">
+        <center>
+            <span class="fragment" data-fragment-index="0">
+            <figurecaption style="font-size:70%">Finger vein reconstruction from binary templates</figurecaption>
+            <figure><img src="../assets/images/talks/template-attack-2.png" width="60%"></figure>
+            <figurecaption style="font-size:50%">"Inverse Biometrics: Reconstructing Grayscale Finger Vein Images from Binary Features," IJCB, 2020</figurecaption>
+            </span>
+        </center>
+    </div>
+</section>
+
+<section data-background="teal">
+    <h2>HEFT</h2>
+    <center>
+        Homomorphically Encrypted Fusion of Biometric Templates
+    </center>
+</section>
+
+<section>
+    <h2>HEFT: Overview</h2>
+    <figure><img src="../../assets/images/talks/2022-ijcb-overview.svg" alt="" width="92%"></figure>
+</section>
+
+<section>
+    <h2>HEFT: Concatenation</h2>
+    <figure><img src="../../assets/images/talks/2022-ijcb-overview-concatenation.svg" alt="" width="92%"></figure>
+</section>
+
+<section>
+    <h2>Homomorphic Concatenation</h2>
+    <figure><img src="../../assets/images/talks/2022-ijcb-concatenation.svg" alt="" width="80%"></figure>
+</section> -->
+
+<!-- <section>
+    <h2>HEFT: Linear Projection</h2>
+    <figure><img src="../../assets/images/talks/2022-ijcb-overview-projection.svg" alt="" width="92%"></figure>
+</section>
+
+<section>
+    <h2>Linear Projection</h2>
+    <div id="left" style="width:50%">
+        <span class="fragment">
+            <figurecaption>Naive</figurecaption>
+            <figure><img src="../../assets/images/talks/2022-ijcb-naive.svg" alt="" width="84%"></figure>
+        </span>
+        <span class="fragment">
+            <figurecaption>Hybrid</figurecaption>
+            <figure><img src="../../assets/images/talks/2022-ijcb-hybrid.svg" alt="" width="84%"></figure>
+        </span>
+    </div>
+    <div id="right" style="width:50%">
+        <span class="fragment">
+            <figurecaption>SIMD</figurecaption>
+            <figure><img src="../../assets/images/talks/2022-ijcb-simd.svg" alt="" width="84%"></figure>
+        </span>
+    </div>
+</section>
+
+<section data-background="white">
+    <h2 style="color:black;">Linear Projection Comparison</h2>
+    <div id="left" style="width:50%" class="fragment">
+        <figurecaption style="color:black">Computational Complexity</figurecaption>
+        <figure><img src="../../assets/images/talks/2022-ijcb-computational-complexity.png" alt="" width="80%"></figure>        
+    </div>
+    <div id="right" style="width:50%" class="fragment">
+        <figurecaption style="color:black">Space Complexity</figurecaption>
+        <figure><img src="../../assets/images/talks/2022-ijcb-space-complexity.png" alt="" width="80%"></figure>
+    </div>
+    <div id="left" style="width:50%" class="fragment">
+        <br>
+        <ul style="font-size:75%; color:black">
+            <li><u>Hybrid</u></li>
+            <ul>
+                <li><span style="color:green;">Pros:</span> Low memory and runtime overhead</li>
+                <li><span style="color:red;">Cons:</span> Scales linearly with number of samples</li>
+            </ul>
+        </ul>
+    </div>
+    <div id="right" style="width:50%" class="fragment">
+        <br>
+        <ul style="font-size:75%;color:black">
+            <li><u>SIMD</u></li>
+            <ul>
+                <li><span style="color:green;">Pros:</span> Scales well with number of samples</li>
+                <li><span style="color:red;">Cons:</span> High memory and runtime overhead</li>
+            </ul>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>HEFT: Feature Normalization</h2>
+    <figure><img src="../../assets/images/talks/2022-ijcb-overview-normalization.svg" alt="" width="80%"></figure>
+</section>
+
+<section>
+    <h2>$\ell_2$-Normalization of Vector</h2>
+    <br><br>
+    <center>$\hat{\mathbf{u}} = \frac{\mathbf{u}}{\|\mathbf{u}\|_2} \quad \rightarrow \quad$ <span style="color:orange;">division<sup>$\dagger$</sup></span></center>
+    <br><br>
+    where
+    <br><br>
+    <center>$\|\mathbf{u}\|_2 = \sqrt{\sum_{i=1}^d u_i^2} \quad \rightarrow \quad$ <span style="color:orange;">square-root<sup>$\dagger$</sup></span></center>
+    <br><br>
+    <ul><li style="color:orange"><sup>$\dagger$</sup>: problematic operations for FHE</li></ul>
+</section>
+
+<section data-background="#ffffff">
+    <h2 class="r-fit-text" style="color:black;">Inverse Square Root: Polynomial Approximation</h2>
+    <center style="color:black;">$$\frac{1}{\sqrt{x}} = \sum_{i=1}^6 a_i x^i$$</center>
+    <div id="left" style="width:50%;">
+        <figure><img src="../../assets/images/talks/2022-ijcb-poly-6.png" alt="" width="90%"></figure>
+    </div>
+    <div id="left" style="width:50%;">
+        <figure><img src="../../assets/images/talks/2022-ijcb-poly-error-6.png" alt="" width="98%"></figure>
+    </div>
+</section>
+
+<section>
+    <h2>FHE-Aware Learning</h2>
+    <center style="color:yellowgreen;">Account for the limitations of FHE to improve performance</center>
+    <ul>
+        <ul class="fragment">
+            <br>
+            <li>FHE is limited to <span style="color:orange;">specific operations</span> on encrypted data.</li>
+            <br>
+            <li>Normalization is not directly computable - need to <span style="color:orange">approximate</span>.</li>
+            <br>
+            <li>Approximation is a source of <span style="color:orange">error</span> and hence a loss of matching performance</li>
+            <br>
+            <li>We incorporate <span style="color:orange">approximate normalization into our training</span> of the projection matrix to <span style="color:orange">recover performance</span></li>
+        </ul>
+    </ul>
+</section>
+
+<section>
+    <h2>Loss Function</h2>
+    <center style="color:yellowgreen;">Main Idea: FHE-Aware Learning</center>
+    <ul>
+        <li class="fragment">$$Loss = \lambda \underbrace{\frac{\sum_M d(\mathbf{c}_i, \mathbf{c}_j)}{|M|}}_{ \color{orange}{Pull} } + (1-\lambda)\underbrace{\frac{\sum_{V}[m + d(\mathbf{c}_i, \mathbf{c}_j) - d(\mathbf{c}_i, \mathbf{c}_k)]_{+}}{|V|}}_{ \color{orange}{Push} }$$</li>
+        <li class="fragment"> where $$d(\mathbf{c}_i, \mathbf{c}_j) = 1-P\underbrace{f(\mathbf{c}_i)}_{ \color{cyan}{approximation} } \cdot P\underbrace{f(\mathbf{c}_j)}_{ \color{cyan}{approximation} }$$
+            $f(\cdot)$ approximates the inverse norm of a vector.
+        </li>        
+    </ul>
+</section>
+
+<section data-background="teal">
+    <h2>Numerical Evaluation</h2>
+</section>
+
+<section>
+    <h2>Experimental Setup</h2>
+    <div id="left" style="width:45%;">
+        <figure><img src="../../assets/images/talks/cplfw.jpg" alt="" width="98%"></figure>
+        <figcaption style="font-size:90%;">Cross-Posed Labelled Faces in the Wild</figcaption>
+    </div>
+    <div id="right" style="width:45%;">
+        <figure>
+            <figcaption>Down</figcaption>
+            <audio controls src="../../assets/images/audio/2022-ijcb-gsc-1.mp3"></audio>
+            <figcaption>Dog</figcaption>
+            <audio controls src="../../assets/images/audio/2022-ijcb-gsc-2.mp3"></audio>
+            <figcaption>Bird</figcaption>
+            <audio controls src="../../assets/images/audio/2022-ijcb-gsc-3.mp3"></audio>
+            <figcaption>Backward</figcaption>
+            <audio controls src="../../assets/images/audio/2022-ijcb-gsc-4.mp3"></audio>
+        </figure>
+        <figcaption>Google Speech Commands</figcaption>
+    </div>
+    <div id="left" style="width:100%;">
+        <br>
+        <ul style="font-size:75%">
+            <ul>
+                <li>Synthetic fusion dataset by randomly pairing classes. </li>
+                <li>10,760 samples over 188 classes.</li>
+            </ul>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Fusion Improves Performance, Reduces Dimensionality</h2>
+    <center><div id="myDataset" style="width:75%;"></div></center>
+    <script>
+        var d3colors = Plotly.d3.scale.category10();
+        var xlabels = ['CPLFW (Dataset 1)', 'GSC (Dataset 2)', 'Concatenation', 'HEFT']
+        var yValues = [0.8401, 0.8550, 0.9253, 0.9508]
+        var trace = {
+            type: 'bar',
+            x: xlabels,
+            y: yValues,
+            text: yValues.map(String),
+            textfont: {color: ['black', 'black', 'black', 'white']},
+            textposition: 'auto',
+            marker: {
+                color: ['rgba(204,204,204,1)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)', 'rgba(222,45,38,0.8)']
+            }
+        };
+        var data = [ trace ];
+        var config = {responsive: true, displaylogo: false};
+        var layout = {
+            title: 'AUROC',
+            font: {size: 12, color: "#FFFFFF"},
+            plot_bgcolor:"#333333",
+            paper_bgcolor:"#333333",
+            yaxis: {color: "white"},
+            yaxis: {color: "white", showline: true, mirror: true},
+            xaxis: {color: "white", showline: true, mirror: true},
+        }
+        Plotly.newPlot('myDataset', data, layout, config );
+    </script>
+    <div id="left" style="width:50%;">
+        <ul style="font-size:75%;">
+            <li class="fragment">Fusion improves performance:
+                <ul>
+                    <li>Face by 11.07%</li>
+                    <li>Voice by 9.58%</li>
+                </ul>
+        </ul>
+    </div>
+    <div id="left" style="width:50%;">
+        <ul style="font-size:75%;">
+            <li class="fragment">Dimensionality Reduction: $512D \rightarrow 32D$ (16$\times$ compression)</li>
+        </ul>
+    </div>
+</section>
+
+<section data-background="white">
+    <h2 class="r-fit-text" style="color:black;">Comparison of Normalization Methods</h2>
+    <figure><img src="../../assets/images/talks/2022-ijcb-normalization-comparison.png" alt="" width="75%"></figure>
+</section> -->
+<!-- 
+<section>
+    <h2>Computational Complexity</h2>
+    <div id="left" style="width:50%" class="fragment">
+        <center><div id='myDiv1' style="width:95%;"></div></center>
+        <script>
+            var xlabels = ['Concatenation', 'Projection', 'Normalization', 'Preprocessing']
+            var trace1 = {
+                type: 'bar',
+                x: xlabels,
+                y: [5.68, 244.89, 31.40, 3.41],
+                marker: {                    
+                    line: {
+                        width: 1.5
+                    }
+                },
+                name: 'Poly (deg=2)'
+            };
+            var trace2 = {
+                type: 'bar',
+                x: xlabels,
+                y: [11.17, 470.86, 83.32, 3.62],
+                marker: {                    
+                    line: {
+                        width: 1.5
+                    }
+                },
+                name: 'Poly (deg=6)'
+            };
+            var trace3 = {
+                type: 'bar',
+                x: xlabels,
+                y: [23.22, 954.03, 380.28, 2.31],
+                marker: {                    
+                    line: {
+                        width: 1.5
+                    }
+                },
+                name: 'Goldschmidt',
+            };
+            var data = [ trace1, trace2, trace3 ];
+            var config = {responsive: true, displaylogo: false};
+            var layout = {
+                title: 'Enrollment',
+                font: {size: 12, color: "#FFFFFF"},
+                plot_bgcolor:"#333333",
+                paper_bgcolor:"#333333",
+                yaxis: {color: "white", showline: true, mirror: true},
+                xaxis: {color: "white", showline: true, mirror: true},
+                showlegend: true,
+                legend: {                    
+                    xanchor: 'right',
+                    yanchor: 'top',
+                    x: 1.00,
+                    y: 0.99
+                }
+            };
+            Plotly.newPlot('myDiv1', data, layout, config );
+        </script>
+        <br>
+        <ul><ul><li>Projection is costliest operation</li></ul></ul>
+    </div>
+    <div id="right" style="width:50%" class="fragment">
+        <center><div id='myDiv2' style="width:95%;"></div></center>
+        <script>
+            var xlabels = ['Concatenation', 'Projection', 'Normalization', 'Matching']
+            var trace1 = {
+                type: 'bar',
+                x: xlabels,
+                y: [22.72, 979.54, 125.59, 4.87 ],
+                marker: {                    
+                    line: {
+                        width: 1.5
+                    }
+                },
+                name: 'Poly (deg=2)'
+            };
+            var trace2 = {
+                type: 'bar',
+                x: xlabels,
+                y: [89.05, 3752.44, 663.95, 5.21],
+                marker: {                    
+                    line: {
+                        width: 1.5
+                    }
+                },
+                name: 'Poly (deg=6)'
+            };
+            var trace3 = {
+                type: 'bar',
+                x: xlabels,
+                y: [185.00, 7602.64, 3030.47, 2.75],
+                marker: {
+                    line: {
+                        width: 1.5
+                    }
+                },
+                name: 'Goldschmidt'
+            };
+            var data = [ trace1, trace2, trace3 ];
+            var config = {responsive: true, displaylogo: false}
+            var layout = {
+                title: 'Authentication',
+                font: {size: 12, color: "#FFFFFF"},
+                plot_bgcolor:"#333333",
+                paper_bgcolor:"#333333",
+                yaxis: {color: "white", showline: true, mirror: true},
+                xaxis: {color: "white", showline: true, mirror: true},
+                showlegend: true,
+                legend: {                    
+                    xanchor: 'right',
+                    yanchor: 'top',
+                    x: 1.00,
+                    y: 0.99
+                }
+            };
+            Plotly.newPlot('myDiv2', data, layout, config );
+        </script>
+        <br>        
+        <ul><ul><li>Projection is costliest operation</li></ul></ul>
+    </div>
+</section> -->
+
+<!-- <section data-background="#511EA8">
+    <h2 class="r-fit-text">What Next for Biometric Encryption?</h2>
+</section>
+
+<section data-background="white">
+    <h2 style="color:black;" class="r-fit-text">Opportunities for Biometric Encryption</h2>
+    <div id="left" style="width:50%">
+        <center><span style="color:blue;font-size:75%"><u>Going beyond template fusion</u></span></center>
+        <figure>
+            <img src="../assets/images/talks/biometric-fusion.svg" width="60%">
+        </figure>
+        <figurecaption style="font-size:50%;color:red">Ongoing CITeR Project (Jan 2023-Present)</figurecaption>
+    </div>
+    <div id="right" style="width:50%">
+        <center><span style="color:blue;font-size:75%"><u>End-to-End encrypted biometric recognition</u></span></center>
+        <br>
+        <figure>
+            <img src="../assets/images/talks/autofhe.png" width="90%">
+        </figure>
+        <figurecaption style="font-size:50%;color:black">End-to-end image classification on CIFAR-10</figurecaption>
+        <br><br>
+        <ul style="font-size:50%;color:black">
+            <li style="color:red">Preliminary Work:</li>
+            <ul><li>Ao and <u>Boddeti</u>, "AutoFHE: Automated Adaption of CNNs for Efficient Evaluation over FHE," Cryptology ePrint Archive 2023</li></ul>
+        </ul>
+    </div>
+</section>
+
+<section data-background="white">
+    <h2 style="color:black;" class="r-fit-text">Opportunities for Biometric Encryption</h2>
+    <div id="left" style="width:50%">
+        <center><span style="color:blue;font-size:75%"><u>Secure federated learning</u></span></center>
+        <figure>
+            <img src="../assets/images/talks/federated-learning-face-recognition.png" width="80%">
+        </figure>
+        <figurecaption style="font-size:50%;color:black">Federated learning for face recognition</figurecaption>
+        <br><br>
+        <ul>
+            <ul style="font-size:50%;color:black">
+                <li>Aggarwal et al. "FedFace: Collaborative Learning of Face Recognition Model," IJCB 2021</li>
+                <li>Meng et al. "Improving Federated Learning Face Recognition via Privacy-Agnostic Clusters," ICLR 2022</li>
+            </ul>
+            <br>
+            <ul style="font-size:50%;color:black;">
+                <li style="color:red">Preliminary Work</li>
+                <ul><li>Yonetani, <u>Boddeti</u>, Kitani, Sato "Privacy-Preserving Visual Learning Using Doubly Permuted Homomorphic Encryption," ICCV 2017</li></ul>
+            </ul>
+        </ul>
+    </div>
+    <div id="right" style="width:50%">
+        <center><span style="color:blue;font-size:75%"><u>Distributed Encrypted Biometric Authentication</u></span></center>
+        <figure>
+            <img src="../assets/images/talks/multi-key-fhe.png" width="80%">
+        </figure>
+        <figurecaption style="font-size:50%;color:black">Multi-Key Homomorphic Encryption</figurecaption>
+        <br>
+        <ul style="font-size:50%;color:black;">
+            <li>Problems with existing FHE solutions for biometrics:</li>
+            <ul>
+                <li>Cannot perform distributed authentication.</li>
+                <li>Even centralized authentication has practical limitations.</li>
+                <ul>
+                    <li>Either, need shared public key, impractical for some use cases.</li>
+                    <li>Or, needs key-switching to work with different private keys.</li>
+                </ul>
+            </ul>
+            <br>
+            <li style="color:red">Solution: Multi-Key FHE</li>
+            <ul><li>Critical for practical deployments.</li></ul>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>A Note on Security vs Privacy</h2>
+    <ul>
+        <li class="fragment" data-fragment-index="0">Security and privacy are very often conflated with each other.</li>
+        <ul>
+            <li class="fragment" data-fragment-index="0">Different but related concepts.</li>
+            <li class="fragment" data-fragment-index="0">Homomorphic encryption: controls access to private information.</li>
+            <li class="fragment" data-fragment-index="0">Differential Privacy: allows analysis + controls information.</li>
+        </ul>
+        <br>
+        <li class="fragment" data-fragment-index="1">Postulates:</li>
+        <ul>
+            <li class="fragment" data-fragment-index="1" style="color:orange">There is no privacy without security.</li>
+            <li class="fragment" data-fragment-index="1">Homomorphic encryption is an <span style="color:limegreen">ideal tool for enhancing privacy</span> but it is <span style="color:orange">not a privacy technique</span> in and of itself.</li>
+        </ul>
+    </ul>
+    <blockquote class="fragment" data-fragment-index="2">Ideal solution: Differential privacy + Homomorphic Encryption</blockquote>
+</section> -->
+<!-- 
+<section>
+    <h2 class="r-fit-text">Summary: CITeR Projects on Biometric Encryption</h2>
+    <div id="left" style="width:50%">
+        <figure>
+            <img src="../assets/images/talks/biometric-attacks-2.svg" width="90%">
+            <figurecaption>Biometric System Threat Model</figurecaption>
+        </figure>
+    </div>
+    <div id="right" style="width:50%">
+        <figure><img src="../../assets/images/talks/2022-ijcb-overview.svg" alt="" width="90%"></figure>
+        <figurecaption>Biometric Template Fusion over Homomorphically Encrypted Templates</figurecaption>
+    </div>
+    <div id="left" style="width:100%">
+        <br>
+        <blockquote>Many avenues for leveraging homomorphic encryption to enhance biometric security and privacy.</blockquote>
+        <center>
+            <i class="fab fa-twitter" style="color:#1DA1F2"></i> <a href="https://twitter.com/VishnuBoddeti">VishnuBoddeti</a>
+        </center>
+    </div>
+</section> -->
+
+            </div>
+        </div>
+        
+        <script src="../../assets/revealjs/dist/reveal.js"></script>
+        <script src="../../assets/revealjs/plugin/notes/notes.js"></script>
+        <script src="../../assets/revealjs/plugin/markdown/markdown.js"></script>
+        <script src="../../assets/revealjs/plugin/highlight/highlight.js"></script>        
+        <script src="../../assets/revealjs/plugin/search/search.js"></script>
+        <script src="../../assets/revealjs/plugin/zoom/zoom.js"></script>
+        <script src="../../assets/revealjs/plugin/math/math.js"></script>
+        
+        <script src="../../assets/revealjs/plugin/menu/menu.js"></script>        
+        <script src="../../assets/revealjs/plugin/pdfexport/pdfexport.js"></script>
+
+        <!-- chalkboard -->
+        <link rel="stylesheet" href="../../assets/revealjs/plugin/chalkboard/style.css">
+        <script src="../../assets/revealjs/plugin/chalkboard/plugin.js"></script>
+
+        <!-- customcontrols -->
+        <link rel="stylesheet" href="../../assets/revealjs/plugin/customcontrols/style.css">
+        <script src="../../assets/revealjs/plugin/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins/menu/font-awesome/css/fontawesome.css">
+
+        <!-- chart -->
+        <script src="../../assets/revealjs/plugin/chart/Chart.min.js"></script>
+        <script src="../../assets/revealjs/plugin/chart/plugin.js"></script>
+
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins/menu/font-awesome/css/fontawesome.css">
+
+        <script>
+          Reveal.initialize({
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              mouseWheel: true,
+              hash: true,
+              autoPlayMedia: true,
+              transition: 'fade',
+              touch: true,
+
+              katex: {
+                version: 'latest',
+                delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+               ],
+               ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+              },
+
+              chalkboard: {
+                  src: "",
+                  eraser: { src: path + 'img/sponge.png', radius: 20},
+                boardmarkers : [
+                        { color: 'rgba(255,220,0,1)', cursor: 'url(' + path + 'img/boardmarker-yellow.png), auto'},
+                        { color: 'rgba(30,144,255, 1)', cursor: 'url(' + path + 'img/boardmarker-blue.png), auto'},
+                        { color: 'rgba(220,20,60,1)', cursor: 'url(' + path + 'img/boardmarker-red.png), auto'},
+                        { color: 'rgba(50,205,50,1)', cursor: 'url(' + path + 'img/boardmarker-green.png), auto'},
+                        { color: 'rgba(255,140,0,1)', cursor: 'url(' + path + 'img/boardmarker-orange.png), auto'},
+                        { color: 'rgba(100,100,100,1)', cursor: 'url(' + path + 'img/boardmarker-black.png), auto'},
+                        { color: 'rgba(150,0,20150,1)', cursor: 'url(' + path + 'img/boardmarker-purple.png), auto'}
+                ],
+                chalks: [
+                        { color: 'rgba(255,255,255,0.5)', cursor: 'url(' + path + 'img/chalk-white.png), auto'},
+                        { color: 'rgba(96, 154, 244, 0.5)', cursor: 'url(' + path + 'img/chalk-blue.png), auto'},
+                        { color: 'rgba(237, 20, 28, 0.5)', cursor: 'url(' + path + 'img/chalk-red.png), auto'},
+                        { color: 'rgba(20, 237, 28, 0.5)', cursor: 'url(' + path + 'img/chalk-green.png), auto'},
+                        { color: 'rgba(220, 133, 41, 0.5)', cursor: 'url(' + path + 'img/chalk-orange.png), auto'},
+                        { color: 'rgba(220,0,220,0.5)', cursor: 'url(' + path + 'img/chalk-purple.png), auto'},
+                        { color: 'rgba(255,220,0,0.5)', cursor: 'url(' + path + 'img/chalk-yellow.png), auto'}
+                ]
+              },
+
+              chart: {
+                defaults: {
+                  global: {
+                    title: { fontColor: "#FFF" },
+                    legend: {
+                      labels: { fontColor: "#FFF" },
+                    },
+                  },
+                  scale: {
+                    scaleLabel: { fontColor: "#FFF" },
+                    gridLines: { color: "#FFF", zeroLineColor: "#FFF" },
+                    ticks: { fontColor: "#FFF" },
+                  }
+                },
+                line: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ], "borderDash": [ [5,10], [0,0] ]},
+                bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]},
+                pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+                radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]},
+              },
+
+              customcontrols: {
+                controls: [
+                    {
+                      id: 'toggle-overview',
+                      title: 'Toggle overview (O)',
+                      icon: '<i class="fa fa-th" style="color:#5DA8A3"></i>',
+                      action: 'Reveal.toggleOverview();'
+                    },
+                    { icon: '<i class="fa fa-pen-square" style="color:#5DA8A3"></i>',
+                      title: 'Toggle chalkboard (B)',
+                      action: 'RevealChalkboard.toggleChalkboard();'
+                    },
+                    { icon: '<i class="fa fa-pen" style="color:#5DA8A3"></i>',
+                      title: 'Toggle notes canvas (C)',
+                      action: 'RevealChalkboard.toggleNotesCanvas();'
+                    }
+                ]
+              },
+
+              plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealSearch, RevealChalkboard, RevealZoom, RevealMath.KaTeX, RevealMenu, PdfExport, RevealChart ]
+          });
+        </script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49985752-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-49985752-2');
+</script>
+
+    </body>
+</html>

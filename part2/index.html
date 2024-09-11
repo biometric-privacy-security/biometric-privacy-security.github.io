@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Part 2: Privacy Concerns and Security Threats</title>
+        <meta name="author" content="Vishnu Boddeti">
+
+        <link rel="stylesheet" href="../../assets/revealjs/dist/reset.css">
+        <link rel="stylesheet" href="../../assets/revealjs/dist/reveal.css">
+        <link rel="stylesheet" href="../../assets/revealjs/dist/theme/vishnu.css" id="theme">
+        <link rel="stylesheet" href="../../assets/revealjs/plugin/highlight/monokai.css" id="highlight-theme">
+
+        <!-- tikzjax -->
+        <link rel="stylesheet" type="text/css" href="../../assets/tikzjax/fonts.css">
+        <script src="../../assets/tikzjax/tikzjax.js"></script>
+
+        <!-- CDN for plotly and fontawesome -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://kit.fontawesome.com/7a9386c7a8.js" crossorigin="anonymous"></script>
+
+        <!-- Theme used for syntax highlighted code -->
+        <style>
+            .reveal code,
+            .reveal .formula-source,
+            .reveal a {
+                color: #3F988E;
+            }
+            .reveal code {
+                padding: 0 0.25em;
+            }
+            .reveal pre.formula-source {
+                box-shadow: none;
+                font-size: 0.8em;
+            }
+            .reveal .formula,
+            .reveal .formula-source {
+                margin: 2.5rem 0;
+            }
+            .reveal li {
+                margin: 0.65em 0;
+            }
+            .reveal .formula.bigger {
+                font-size: 1.8em;
+            }
+
+            /*https://medium.com/@mandieq/beautiful-presentations-from-markdown-who-knew-it-could-be-so-easy-d279aa7f787a*/
+
+            #left {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                float: left;
+                z-index:-10;
+                font-size: 0.85em;
+                line-height: 1.5;
+            }
+
+            #right {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                float: right;
+                z-index:-10;
+                font-size: 0.85em;
+                line-height: 1.5;
+            }
+
+            #center {
+                margin-left: auto;
+                margin-right: auto;
+                float: center;
+                text-align: center;
+                z-index:-10;
+                font-size: 0.85em;
+                line-height: 1.5;
+            }
+
+            #alert {
+                background-color: #ff9800;
+                padding: 10px;
+            }
+
+            #customers {
+              border-collapse: collapse;
+              width: 100%;
+            }
+            #customers td, #customers th {
+              border: 1px solid #ddd;
+              padding: 8px;
+            }
+            /*#customers tr:nth-child(even){background-color: #f2f2f2;}*/
+            #customers tr:hover {background-color: #000000;}
+            #customers th {
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: #4CAF50;
+              color: white;
+            }
+
+            #mytable {
+              border-collapse: collapse;
+              width: 100%;
+            }
+            #mytable td, #mytable th {
+              border: 1px solid #ddd;
+              padding: 8px;
+            }
+            /*#mytable tr:nth-child(even){background-color: #f2f2f2;}*/
+            #mytable tr:hover {background-color: #000000;}
+            #mytable th {
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              color: white;
+            }
+
+            .box {
+              width: 100%;
+              background-color: #333333;
+              border: 2px solid #ccc;
+              border-radius: 5px;
+              padding: 0px;
+              margin: 0px;
+              color:#eeeeec;
+            }
+          
+            .box-header {
+              background-color: #337ab7;
+              color: #fff;
+              padding: 5px;
+              border-radius: 5px 5px 0 0;
+            }
+
+            .red-box-header {
+              background-color: indianred;
+              color: #fff;
+              padding: 5px;
+              border-radius: 5px 5px 0 0;
+            }
+
+            .green-box-header {
+              background-color: #BAB86C;
+              color: black;
+              padding: 5px;
+              border-radius: 5px 5px 0 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+                <!-- Color ramp: ["#559EB1", "#6DB28B", "#8CBB68", "#AFBD4F", "#CFB541", "#E39B39", "#E56E30"] -->
+
+<!-- <section>
+    <p class="title" style="font-size: 50px;">Privacy Concerns and Security Threats Surrounding Biometrics Systems</p>
+    <p class="subtitle"> IJCB Tutorial </p>
+    <p class="date">September 15, 2024</p>
+
+    <div id="left" style="width:50%;">
+        <img width=160 class="mr-3" src="/assets/images/organizers/cropped-amina-bassit.jpg">
+        <figcaption style="text-align: center;"> <a href="https://hal.cse.msu.edu">Amina Bassit</a></figcaption>
+    </div>
+    <div id="left" style="width:50%;">
+        <img width=160 class="mr-3" src="/assets/images/organizers/cropped-vishnu-boddeti.jpg">
+        <figcaption style="text-align: center;"> <a href="https://hal.cse.msu.edu">Vishnu Boddeti</a></figcaption>
+    </div>
+</section> -->
+
+<section data-background-iframe="../../../assets/viz/gradient/">
+    <p class="title" style="font-size: 50px;">Privacy Concerns and Security Threats Surrounding Biometrics Systems</p>
+    <br>
+    <p class="author">Vishnu Boddeti</p>
+    <p class="subtitle"> IJCB Tutorial </p>
+    <p class="date">September 15, 2024</p>
+</section>
+
+<!-- <section>
+    <h2 class="r-fit-text">Privacy and Security in the context of biometric recognition</h2>
+    <center style="font-size: 90%;">Despite their differences, these notions are mentioned interchangeably ...</center>
+    <br>  
+    <ul class="fragment" data-fragment-index="0" style="font-size: 90%;"><span style="color: aqua;"> Security</span> deals with risks of accessing biometric data by unauthorized parties</ul> 
+        <ul class="fragment" data-fragment-index="0" style="font-size: 80%;">
+            <ul>
+                <li>Prevention of attackers from exploiting the system to steal biometric data, alter decisions, impersonate users, or commit identity theft.</li>
+                <li>Example: systems that fully trust involved entities without verification or preventive measures risk serious security threats, potentially allowing stealthy intrusions.</li>
+            </ul>
+    </ul>
+    <ul class="fragment" data-fragment-index="1" style="font-size: 90%;"><span style="color: #FF66C4;"> Privacy</span> deals with risks related to the processing of biometric data by authorized parties. </ul> 
+    <ul class="fragment" data-fragment-index="1" style="font-size: 80%;">
+        <ul >
+            <li>Improper use of biometric data to perform the classification tasks other than recognition without the biometric data owner's consent.</li>
+            <li>Example: inference of personal information beyond identity (e.g., soft biometrics) due to the absence of restriction policies on biometric reference DBs.</li>
+        </ul>
+    </ul>
+    <center class="fragment" data-fragment-index="2" style="font-size: 90%;color: rgb(219, 19, 19);"><em>Security is crucial for maintaining privacy as there is no privacy without security.</em></center>
+</section> -->
+
+
+<section>
+    <h2 class="r-fit-text">Deep learning improves biometric recognition</h2>
+    <div class="r-stack">
+        <img class="fragment current-visible" data-fragment-index="0" src="../assets/images/talks/part2/tradeoffs-1-v2.svg" width="85%">        
+        <img class="fragment" data-fragment-index="1" src="../assets/images/talks/part2/tradeoffs-2-v2.svg" width="85%">
+    </div>
+    <blockquote class="fragment" data-fragment-index="1" style="border-radius: 10px;">However, it introduces new challenges</blockquote>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Privacy and Security in the context of biometric recognition</h2>
+    <div class="r-stack">
+        <center class="fragment current-visible" data-fragment-index="0" style="font-size: 90%;"><span style="color: #FF66C4;">Privacy</span> and <span style="color: aqua;">security</span> are mentioned interchangeably despite their differences...</center>
+        <img class="fragment current-visible" data-fragment-index="1" src="../assets/images/talks/part2/Privacy.svg" width="100%">
+        <img class="fragment" data-fragment-index="2" src="../assets/images/talks/part2/Security&Privacy-v2.svg" width="100%">
+    </div>
+    <div class="r-stack">
+        <lu class="fragment current-visible" data-fragment-index="1">Assuming access, what sensitive information can be learned?</lu>
+        <lu class="fragment current-visible" data-fragment-index="2">How to gain access to sensitive assets?</lu>
+        <blockquote class="fragment" data-fragment-index="4" style="border-radius: 10px;">There is no <span style="color: #FF66C4;">privacy</span> without <span style="color: aqua;">security</span></blockquote>
+    </div>
+
+</section>
+
+<section>
+    <h2 class="r-fit-text">What are the <span style="color: #FF66C4;"> privacy</span> and <span style="color: aqua;"> security </span> risks in the adoption of DL?</a></h2>
+
+    <div class="r-stack">
+        <img src="../assets/images/talks/part2/recOver-1.svg" width="100%">
+    </div>
+    <br>
+    <!-- <center class="r-fit-text"> What are the <span style="color: #FF66C4;"> privacy</span> and <span style="color: aqua;"> security </span> risks brought by the adoption of DL in biometrics?</center> -->
+    <!-- <blockquote class="fragment" style="border-radius: 10px;">What are the <span style="color: #FF66C4;"> privacy</span> and <span style="color: aqua;"> security </span> risks in the adoption of DL?</blockquote> -->
+</section>
+
+
+<section>
+    <h2 class="r-fit-text">Can you <a style="color: rgb(255,128,0);">identify</a> Potential <a style="color: rgb(255,128,0);">Attack Points</a> in Biometrics Systems?</h2>
+    <div class="r-stack">
+        <img class="fragment current-visible" src="../assets/images/talks/part2/recOver-2.svg" width="100%">
+        <img class="fragment current-visible" src="../assets/images/talks/part2/recOver-2-att.svg" width="100%">
+        <img class="fragment current-visible" src="../assets/images/talks/part2/recOver-3.svg" width="100%">
+        <img class="fragment current-visible" src="../assets/images/talks/part2/recOver-3-att.svg" width="100%">
+        <img class="fragment current-visible" src="../assets/images/talks/part2/recOver-4.svg" width="100%">
+        <img class="fragment current-visible" src="../assets/images/talks/part2/recOver-4-att.svg" width="100%">
+        <img class="fragment current-visible" src="../assets/images/talks/part2/recOver-5.svg" width="100%">
+        <img class="fragment current-visible" src="../assets/images/talks/part2/recOver-5-att.svg" width="100%">
+        <img class="fragment current-visible" src="../assets/images/talks/part2/recOver-6.svg" width="100%">
+        <img class="fragment current-visible" src="../assets/images/talks/part2/recOver-6-att.svg" width="100%">
+        <img class="fragment" src="../assets/images/talks/part2/recOver-1-att.svg" width="100%">
+    </div>
+</section>
+
+<section>
+    <h2 class="r-fit-text"><a style="color: rgb(255,128,0);">This Tutorial</a> focuses on those Biometrics Systems Attacks</h2>
+    <div class="r-stack">
+        <img src="../assets/images/talks/part2/recOver-1-att-2.svg" width="100%">
+    </div>
+</section>
+
+<!-- <section>
+    <h2 class="r-fit-text">Security models and proofs</h2>
+    <ul>
+        <ul style="font-size: 90%;">
+            <li style="font-size: 90%;">Security against semi-honest adversaries</li>
+                <ul style="font-size: 70%;">
+                    <li>Semi-honest attacker follows the protocol prescription as it is but he is curious to learn sensitive information in the possession of other parties.</li>
+                    <li>Protocol design: with the assumption that the parties will follow the protocol, we need to ensure that our protocol does not leak information.</li>
+                </ul>
+            <li style="font-size: 90%;">Security against malicious adversaries</li>
+                <ul style="font-size: 70%;">
+                    <li>Malicious attacker does not follow the protocol and acts arbitrary and can inject and modify messages to not only steal sensitive information but also to compromise the protocol's outcome.</li>
+                    <li>Protocol design: First design a protocol secure against semi-honest adversaries and use verification measures (e.g., Zero-Knowledge proofs) to force the entities to act honestly, otherwise they should be caught.</li>    
+                </ul> 
+            <li style="font-size: 90%;">Security proofs generally follow the real-world ideal-world paradigm and are based on hardness assumptions of mathematical problems.</li>            
+        </ul>
+    </ul>
+</section> -->
+
+<section>
+    <h2 class="r-fit-text">From Template inversion attack to Replay and Presentation attack</h2>
+    <div id="center" style="width:100%;">
+        <img src="../assets/images/talks/part2/recOver-1-att-3.svg" width="100%">
+    </div>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Template inversion attack on High resolution image</h2>
+    <br>
+    <br>
+    <div id="center" style="width:100%;">
+        <img src="../assets/images/talks/part2/highResDiagram.png" width="100%">
+        <figcaption  style="font-size: 80%;">High resolution image reconstruction <a href="https://proceedings.neurips.cc/paper_files/paper/2023/file/29e4b51d45dc8f534260adc45b587363-Paper-Conference.pdf">[SM23]</a></figcaption>
+    </div>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Template inversion attack on low resolution images</h2>
+    <br>
+    <br>
+    <div id="center" style="width:100%;">
+        <img src="../assets/images/talks/part2/lowResDiagram.png" width="100%">
+        <figcaption  style="font-size: 80%;">Low resolution image reconstruction <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10478940&casa_token=Pac6TRVC8BoAAAAA:JWda3V_b9z2YIIWhk0Q8Vo8DjADmtrkExMhIB99ZW1v1pHH5bEIdxJe_0FXcAR17mNVgzcHsFoo&tag=1">[SHM24]</a></figcaption>
+    </div>
+</section>
+
+
+<section>
+    <h2 class="r-fit-text">Template inversion attack <a style="color: rgb(255,128,0);">enables</a> Presentation attack</h2>
+    <br>
+    <br>
+    <div>
+        <img src="../assets/images/talks/part2/interconnectedAttacks.png" width="100%">
+        <figcaption  style="font-size: 40%;"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10239446">[SM23] Comprehensive vulnerability evaluation of face recognition systems to template inversion attacks via 3D face reconstruction</a></figcaption>
+    </div>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Presentation attack via digital replay and printed photograph</h2>
+    <div id="images-container" style="display: flex; justify-content: center;">
+        <div id="left" style="width:80%; text-align: center;">
+            <img width=300 class="mr-3" src="../assets/images/talks/part2/printedPhoto.png">
+            <figcaption  style="font-size: 60%;">Presentation attack via printed photograph</figcaption>
+        </div>
+        <div id="right" style="width: 80%; text-align: center;">
+            <img width=300 class="mr-3" src="../assets/images/talks/part2/replayAttack.png">
+            <figcaption style="font-size: 60%;">Presentation attack via digital replay</figcaption>
+        </div>
+    </div>
+    <br>
+    <ul style="font-size: 40%;"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10239446">[SM23] Comprehensive vulnerability evaluation of face recognition systems to template inversion attacks via 3D face reconstruction</a></ul>
+</section>
+
+<!-- <section>
+    <h2 class="r-fit-text">Presentation attack using template inversion models in the whitebox and blackbox scenarios</h2>
+    <div id="images-container" style="display: flex; justify-content: center;">
+        <div id="left" style="width:80%; text-align: center;">
+            <img width=400 class="mr-3" src="../assets/images/talks/part2/PA1.png">
+            <figcaption  style="font-size: 60%;">Injection of the reconstructed image</figcaption>
+            <br>
+            <ul style="font-size: 40%;">* Shahreza, H. O., & Marcel, S. (2023). Comprehensive vulnerability evaluation of face recognition systems to template inversion attacks via 3D face reconstruction.</ul>
+        </div>
+        <div id="right" style="width: 100%; text-align: center;">
+            <img width=400 class="mr-3" src="../assets/images/talks/part2/PA2.png">            
+            <img width=400 class="mr-3" src="../assets/images/talks/part2/PA4.png">
+            <figcaption style="font-size: 60%;">Presentation attacks via digital replay</figcaption>
+            <img width=400 class="mr-3" src="../assets/images/talks/part2/PA3.png">
+            <img width=400 class="mr-3" src="../assets/images/talks/part2/PA5.png">
+            <figcaption style="font-size: 60%;">Presentation attacks via printed photograph</figcaption>
+        </div>
+    </div>
+
+</section> -->
+
+
+<section>
+    <h2 class="r-fit-text">Performance of GaFar+GC on ArcFace-trained FR systems</h2>
+    <center><div id='myDiv3' style="width:95%;"></div></center>
+    <ul style="font-size: 40%;"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10239446">The GaFar+GC method can be found in [SM23].</a></ul>
+    <script>
+        var xlabels = ["Injection", "Replay", "Presentation"];
+        var trace1 = {
+            type: 'bar',
+            x: xlabels,
+            y: [86.67, 85.71, 82.86],
+            name: 'White-box attack',
+            marker: {
+                color: '#A2C8A2',
+            },
+            text: [86.67, 85.71, 82.86],  
+            textposition: 'auto'  
+        };
+        var trace2 = {
+            type: 'bar',
+            x: xlabels,
+            y: [62.86, 54.76, 51.90],
+            name: 'Black-box attack',
+            marker: {
+                color: '#C8A2C8'
+            },
+            text: [62.86, 54.76, 51.90],  
+            textposition: 'auto'  
+        };
+    
+        var data = [trace1, trace2];
+        
+        var config = {responsive: true, displaylogo: false};
+        
+        var layout = {
+            title: 'Performance results using iPhone 12',
+            font: {size: 12, color: "#FFFFFF"},
+            plot_bgcolor:"#333333",
+            paper_bgcolor:"#333333",
+            yaxis: {
+                type: 'log',
+                autorange: true,
+                showline: true,
+                color: 'white',
+                mirror: true,
+                title: 'Attack Success Rate(%)'
+            },
+            xaxis: {
+                showline: true,
+                color: 'white',
+                mirror: true
+            },
+            showlegend: true,
+            legend: {
+                orientation: 'h',
+                xanchor: 'right',
+                yanchor: 'bottom',
+                x: 1.00,
+                y: -0.2,
+            },
+            barmode: 'group'  
+        };        
+        Plotly.newPlot('myDiv3', data, layout, config);
+    </script>
+    
+</section>
+
+<section>
+    <h2 class="r-fit-text">Template recovery attack and its consequences</h2>
+    <div id="center" style="width:100%;">
+        <img src="../assets/images/talks/part2/recOver-1-att-4.svg" width="100%">
+    </div>
+</section>
+
+
+
+<section>
+    <h2 class="r-fit-text">Scenario 1: <a style="color: rgb(255,128,0);">One-to-one</a> Template recovery Attack</h2>
+    <br>
+    <br>
+    <div class="r-stack">
+        <img class="fragment current-visible" src="../assets/images/talks/part2/1to1-recoveryAttack.svg" width="100%">
+        <img class="fragment" src="../assets/images/talks/part2/1to1-recoveryAttack-v2.svg" width="100%">
+    </div>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Scenario 2: <a style="color: rgb(255,128,0);">One-to-many</a> Template recovery Attack</h2>
+    <br>
+    <br>
+    <div class="r-stack">
+        <img class="fragment current-visible" src="../assets/images/talks/part2/1toN-recoveryAttack.svg" width="100%">
+        <img class="fragment" src="../assets/images/talks/part2/1toN-recoveryAttack-v2.svg" width="100%">
+    </div>
+</section>
+
+<section>
+    <h2 class="r-fit-text">What can SP learn from leaked comparison scores?</h2>
+    <br>
+    <div class="r-stack">
+        <img src="../assets/images/talks/part2/recoveryAttack.svg" width="90%">
+    </div>    
+    <ul style="font-size: 30%;"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10449211&casa_token=RS8KNdv5oD8AAAAA:rg_AdYSprapf-nsDqvBCj60AdIXzX1Q7ZIct3tmg4YJOOIbMjhh_QLhxlhjvUEoRTWS6vPx-i7A&tag=1">[BHR+23] Template Recovery Attack on Homomorphically Encrypted Biometric Recognition Systems with Unprotected Threshold Comparison</a></ul>
+</section>
+
+<!-- <section>
+    <h2 class="r-fit-text">Template recovery attack setting</h2>
+    <ul>
+        <li class="fragment">Target Biometric Systems</li>
+        <ul style="font-size:70%">
+            <li class="fragment">Similarity measures based on the <a style="color: rgb(255,128,0);">inner product</a></li>
+            <li class="fragment"><a style="color: rgb(255,128,0);">Normalized</a> feature vectors.</li>
+            <li class="fragment"><a style="color: rgb(255,128,0);">Protected</a> templates.</li>
+        </ul>
+        <li class="fragment">Attacker is an <a style="color: rgb(255,128,0);">honest-but-curious</a> Service Provider (SP)</li>
+        <ul style="font-size:70%">
+            <li class="fragment">SP aims to remains honest-but-curious but learn a specific user's raw biometric template from</li>
+            <ul>
+                <li class="fragment">The <a style="color: rgb(255,128,0);">revealed scores</a> it naturally receives.</li>
+                <li class="fragment">Some <a style="color: rgb(255,128,0);">auxiliary knowledge it can legitimately acquire</a> without colluding with the DB server.</li>
+            </ul>
+        </ul>
+    </ul>
+    <blockquote class="fragment" style="font-weight: bold; background-color: rgba(255, 128, 0, 0.572);border-radius: 10px;"><em>How to acquire this auxiliary knowledge?</em></blockquote>
+</section> -->
+
+
+
+
+
+<section>
+    <h2 class="r-fit-text">Template Recovery reduced to a simple optimization problem</h2>
+    <div id="left" style="width:40%;">
+        <br>
+        <br>
+        <img src="../assets/images/talks/part2/recoveryAttack.svg" width="100%">
+        <ul style="font-size: 30%;"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10449211&casa_token=RS8KNdv5oD8AAAAA:rg_AdYSprapf-nsDqvBCj60AdIXzX1Q7ZIct3tmg4YJOOIbMjhh_QLhxlhjvUEoRTWS6vPx-i7A&tag=1">[BHR+23] Template Recovery Attack on Homomorphically Encrypted Biometric Recognition Systems with Unprotected Threshold Comparison</a></ul>
+    </div>
+    <div id="right" style="width:60%;">
+        <ul>
+            <li class="fragment" data-fragment-index="1">Optimization Problem</li>
+            <ul class="fragment" data-fragment-index="1" style="font-size:60%">
+                <li>Given <a style="color: rgb(255,128,0);">$k$ fake templates</a> $\{f_i\}_{i\in [1,k]}$, that are <a style="color: rgb(255,128,0);">normalized</a> $d$-dim vectors sampled at random, and their corresponding <a style="color: rgb(255,128,0);">scores $s_i$ w.r.t. the same target $T$</a>, find the recovered template $\hat{T}$ such that $\hat{T}^{^{\intercal}} \cdot \hat{T} = 1$.</li>
+                <li>$\hat{T}$ is recovered from the following minimization
+                    $$\underset{\hat{T}^{^{\intercal}} \cdot \hat{T} = 1}{\operatorname{min}} \hat{T}^{^{\intercal}}  \cdot F - S$$</li>
+            </ul>
+            <li class="fragment" data-fragment-index="2">Solution</li>
+            <ul class="fragment" data-fragment-index="2" style="font-size:60%">
+                <li>Using the Lagrange multiplier $\lambda$ and forming the Lagrangian function $$ \mathcal{L}(\hat{T},\lambda) = \sum_{i = 1}^{k} ( \hat{T}^{^{\intercal}} \cdot F_{i}-s_{i})^{2} +\lambda (\hat{T}^{^{\intercal}} \cdot \hat{T} - 1) $$</li>
+                <li>After a partial derivation of $\frac{\partial \mathcal{L}}{\partial \hat{T}}$, solve the following equation <a style="color: rgb(255,128,0);">$$ \left[ FF^{^{\intercal}}+ \lambda \mathit{I}_{d} \right] \cdot \hat{T}  - F \cdot S = 0 $$</a></li>
+            </ul>
+        </ul>
+    </div>    
+</section>
+
+<section>
+    <h2 class="r-fit-text">Evaluation of the score distribution using recovered Templates</h2>    
+    <br>
+    <br>
+    <div id="left" style="width:50%;">
+        <img src="../assets/images/talks/part2/scoreDistAttack-1.png" width="90%">
+    </div>
+    <div id="left" style="width:50%;">
+        <img src="../assets/images/talks/part2/scoreDistAttack-2.png" width="90%">
+    </div>
+    <br>
+    <ul id="center" class="r-fit-text">Score distribution of <a style="color: rgb(126,200,136);">original-original pairs</a> vs. <a style="color: rgb(255,138,137);">original-recovered pairs</a></ul>
+</section>
+
+
+<section>
+    <h2>Evaluation of Attack Success Rate</h2>
+    <center>
+        <lu style="font-size: 90%;">$\mathrm{SR}(\theta, k) = \frac{\left|\{\theta \leq \mathrm{IP}(\tilde{x}_{\mathrm{rec}},y_{\mathrm{org}})\}\right|}{\left|\{\theta \leq \mathrm{IP}(x_{\mathrm{org}},y_{\mathrm{org}})\}\right|}$ </lu>
+        <div id='myDiv4' style="width:95%;"></div>
+        <blockquote style="border-radius: 10px; font-size: 75%;"><em>Stricter thresholds lead to lower attack success rates.</em></blockquote>
+    </center>
+    <script>
+        var xlabels = ["400", "512", "700", "1000"];
+        var trace1 = {
+            type: 'bar',
+            x: xlabels,
+            y: [99.14, 99.88, 100, 100],
+            name: '0.1% FMR',
+            marker: {
+                color: '#A2C8A2',
+            },
+            text: [99.14, 99.88, 100, 100],
+            textposition: 'auto' 
+        };
+        var trace2 = {
+            type: 'bar',
+            x: xlabels,
+            y: [98.88, 99.94, 99.95, 100],
+            name: '0.01% FMR',
+            marker: {
+                color: '#A2C8A2'
+            },
+            text: [98.88, 99.94, 99.95, 100],
+            textposition: 'auto' 
+        };
+        var trace3 = {
+            type: 'bar',
+            x: xlabels,
+            y: [88.86, 98.82, 99.75, 100],
+            name: '0.001% FMR',
+            marker: {
+                color: '#C8A2C8'
+            },
+            text: [88.86, 98.82, 99.75, 100],
+            textposition: 'auto' 
+        };
+        var data = [trace2, trace3];
+        
+        var config = {responsive: true, displaylogo: false};
+        
+        var layout = {
+            // title: 'Attack Success Rate (without quantization)',
+            font: {size: 12, color: "#FFFFFF"},
+            plot_bgcolor:"#333333",
+            paper_bgcolor:"#333333",
+            yaxis: {
+                type: 'log',
+                autorange: true,
+                showline: true,
+                color: 'white',
+                mirror: true,
+                title: 'Success Rate (%)', 
+            },
+            xaxis: {
+            type: 'category',
+            showline: true,
+            color: 'white',
+            mirror: true,
+            tickvals: xlabels, 
+            ticktext: xlabels, 
+            tickmode: 'array', 
+            title: 'Number of fake templates (k)', 
+            },
+            showlegend: true,
+            legend: {
+                orientation: 'h',
+                xanchor: 'right',
+                yanchor: 'bottom',
+                x: 1.00,
+                y: -0.2,
+            },
+            barmode: 'group'  
+        };        
+        Plotly.newPlot('myDiv4', data, layout, config);
+    </script>
+    
+</section>
+
+
+
+
+<!-- <section>
+    <h2 class="r-fit-text">How much knowledge does an attacker need for a successful bypass?</h2>   
+    <div id="center" style="width:70%;">
+        <img src="../assets/images/talks/part2/estimatedNumberOfFakeTemp.png" width="90%">
+    </div>
+    <blockquote class="fragment" style="border-radius: 10px;"><em>An attacker needs only between $60$ to $165$ fake templates to recover a $512$-dim target vector.</em></blockquote>
+</section> -->
+
+
+<section>
+    <h2 class="r-fit-text">How much knowledge does an attacker need for a successful bypass?</h2>
+    <center>        
+        <div id='myDiv5' style="width:95%;"></div>
+        <blockquote style="border-radius: 10px; font-size: 75%;"><em>An attacker needs only between $75$ to $177$ fake templates to recover a $512$-dim target vector.</em></blockquote>
+    </center>
+    <script>
+        var xlabels = ["0.1% FMR", "0.01% FMR", "0.001% FMR"];
+        var trace1 = {
+            type: 'bar',
+            x: xlabels,
+            y: [80.53, 122.95, 176.12],
+            name: 'Mean',
+            marker: {
+                color: '#A2C8A2',
+            },
+            text: [80.53, 122.95, 176.12],
+            textposition: 'auto' 
+        };
+        var trace2 = {
+            type: 'bar',
+            x: xlabels,
+            y: [75, 120, 160],
+            name: 'Median',
+            marker: {
+                color: '#C8A2C8'
+            },
+            text: [75, 120, 160],
+            textposition: 'auto' 
+        };
+        var data = [trace1, trace2];
+        
+        var config = {responsive: true, displaylogo: false};
+        
+        var layout = {
+            font: {size: 12, color: "#FFFFFF"},
+            plot_bgcolor:"#333333",
+            paper_bgcolor:"#333333",
+            yaxis: {
+                type: 'log',
+                autorange: true,
+                showline: true,
+                color: 'white',
+                mirror: true,
+                title: '# Fake templates', 
+            },
+            xaxis: {
+            type: 'category',
+            showline: true,
+            color: 'white',
+            mirror: true,
+            tickvals: xlabels, 
+            ticktext: xlabels, 
+            tickmode: 'array', 
+            title: 'Threshold', 
+            },
+            showlegend: true,
+            legend: {
+                orientation: 'h',
+                xanchor: 'right',
+                yanchor: 'bottom',
+                x: 1.00,
+                y: -0.2,
+            },
+            barmode: 'group'  
+        };        
+        Plotly.newPlot('myDiv5', data, layout, config);
+    </script>
+    
+</section>
+
+
+<!-- <section>
+    <h2 class="r-fit-text">Gender Information Analysis of the recovered templates</h2>
+    <div id="center" style="width:60%;">
+        <img src="../assets/images/talks/part2/genderInfo.png" width="90%">
+    </div>
+    <div id="center" style="width:100%;">
+        <ul> 
+            <ul style="font-size: 70%;">
+                <li>Accuracy difference between the original templates (our baseline) and recovered templates is $0\%$ to $7\%$.</li>
+                <li>Advanced gender classifiers would perform similarly on recovered and original templates.</li>
+            </ul>
+        </ul>
+    </div>
+</section> -->
+
+<!-- <section>
+    <h2 class="r-fit-text">Evaluation of Image Reconstruction of the recovered templates</h2>
+    <div id="center" style="width:100%;">
+        <img src="../assets/images/talks/part2/reconstructedFake-recoveryAttack.svg" width="100%">
+        <ul id="center" style="font-size: 100%;"> Using <a style="color: rgb(255,128,0);">random normalized feature vectors</a> as fake templates.</ul>
+    </div>
+</section> -->
+
+<section>
+    <h2 class="r-fit-text">Evaluation of Image Reconstruction of the recovered templates</h2>
+    <div id="center" style="width:100%;">
+        <img src="../assets/images/talks/part2/reconstructedSyn-recoveryAttack.svg" width="100%">
+        <ul id="center" style="font-size: 100%;"> Using <a style="color: rgb(255,128,0);">synthetic feature vectors</a> extracted from <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10007961&casa_token=1V-2iX76wcUAAAAA:WQAfo2xvFxz45tGbBBVbF6kZhIYmbC1abj8nHMleb2RKwrSzXI_VURECvkOXAKk29WosQ5965_E&tag=1">the SFace dataset</a></ul>
+    </div>
+</section>
+
+<section>
+    <h2 style="font-size: 200%;">Takeaways of this part</h2>
+    <div id="left" style="width:60%;">
+        <img src="../assets/images/talks/part2/recOver-1-att.svg" width="100%">
+    </div>
+    <div id="left" style="width:40%;">
+        <ul style="font-size: 70%;">
+            <ul>
+                <li class="fragment">Cost-effective attacks</li>
+                <li class="fragment">Drastic privacy and security implications</li>
+                <li class="fragment">Lack of privacy and security controls leads to biometric leakage</li>
+                <li class="fragment">Mitigation of template inversion attack and template recovery 
+                    <ul><li>Protection of templates and scores</li></ul>
+                </li>       
+            </ul>
+        </ul>
+    </div>
+</section>
+
+
+            </div>
+        </div>
+        
+        <script src="../../assets/revealjs/dist/reveal.js"></script>
+        <script src="../../assets/revealjs/plugin/notes/notes.js"></script>
+        <script src="../../assets/revealjs/plugin/markdown/markdown.js"></script>
+        <script src="../../assets/revealjs/plugin/highlight/highlight.js"></script>        
+        <script src="../../assets/revealjs/plugin/search/search.js"></script>
+        <script src="../../assets/revealjs/plugin/zoom/zoom.js"></script>
+        <script src="../../assets/revealjs/plugin/math/math.js"></script>
+        
+        <script src="../../assets/revealjs/plugin/menu/menu.js"></script>        
+        <script src="../../assets/revealjs/plugin/pdfexport/pdfexport.js"></script>
+
+        <!-- chalkboard -->
+        <link rel="stylesheet" href="../../assets/revealjs/plugin/chalkboard/style.css">
+        <script src="../../assets/revealjs/plugin/chalkboard/plugin.js"></script>
+
+        <!-- customcontrols -->
+        <link rel="stylesheet" href="../../assets/revealjs/plugin/customcontrols/style.css">
+        <script src="../../assets/revealjs/plugin/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins/menu/font-awesome/css/fontawesome.css">
+
+        <!-- chart -->
+        <script src="../../assets/revealjs/plugin/chart/Chart.min.js"></script>
+        <script src="../../assets/revealjs/plugin/chart/plugin.js"></script>
+
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins/menu/font-awesome/css/fontawesome.css">
+
+        <script>
+          Reveal.initialize({
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              mouseWheel: true,
+              hash: true,
+              autoPlayMedia: true,
+              transition: 'fade',
+              touch: true,
+
+              katex: {
+                version: 'latest',
+                delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+               ],
+               ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+              },
+
+              chalkboard: {
+                  src: "",
+                  eraser: { src: path + 'img/sponge.png', radius: 20},
+                boardmarkers : [
+                        { color: 'rgba(255,220,0,1)', cursor: 'url(' + path + 'img/boardmarker-yellow.png), auto'},
+                        { color: 'rgba(30,144,255, 1)', cursor: 'url(' + path + 'img/boardmarker-blue.png), auto'},
+                        { color: 'rgba(220,20,60,1)', cursor: 'url(' + path + 'img/boardmarker-red.png), auto'},
+                        { color: 'rgba(50,205,50,1)', cursor: 'url(' + path + 'img/boardmarker-green.png), auto'},
+                        { color: 'rgba(255,140,0,1)', cursor: 'url(' + path + 'img/boardmarker-orange.png), auto'},
+                        { color: 'rgba(100,100,100,1)', cursor: 'url(' + path + 'img/boardmarker-black.png), auto'},
+                        { color: 'rgba(150,0,20150,1)', cursor: 'url(' + path + 'img/boardmarker-purple.png), auto'}
+                ],
+                chalks: [
+                        { color: 'rgba(255,255,255,0.5)', cursor: 'url(' + path + 'img/chalk-white.png), auto'},
+                        { color: 'rgba(96, 154, 244, 0.5)', cursor: 'url(' + path + 'img/chalk-blue.png), auto'},
+                        { color: 'rgba(237, 20, 28, 0.5)', cursor: 'url(' + path + 'img/chalk-red.png), auto'},
+                        { color: 'rgba(20, 237, 28, 0.5)', cursor: 'url(' + path + 'img/chalk-green.png), auto'},
+                        { color: 'rgba(220, 133, 41, 0.5)', cursor: 'url(' + path + 'img/chalk-orange.png), auto'},
+                        { color: 'rgba(220,0,220,0.5)', cursor: 'url(' + path + 'img/chalk-purple.png), auto'},
+                        { color: 'rgba(255,220,0,0.5)', cursor: 'url(' + path + 'img/chalk-yellow.png), auto'}
+                ]
+              },
+
+              chart: {
+                defaults: {
+                  global: {
+                    title: { fontColor: "#FFF" },
+                    legend: {
+                      labels: { fontColor: "#FFF" },
+                    },
+                  },
+                  scale: {
+                    scaleLabel: { fontColor: "#FFF" },
+                    gridLines: { color: "#FFF", zeroLineColor: "#FFF" },
+                    ticks: { fontColor: "#FFF" },
+                  }
+                },
+                line: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ], "borderDash": [ [5,10], [0,0] ]},
+                bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]},
+                pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+                radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]},
+              },
+
+              customcontrols: {
+                controls: [
+                    {
+                      id: 'toggle-overview',
+                      title: 'Toggle overview (O)',
+                      icon: '<i class="fa fa-th" style="color:#5DA8A3"></i>',
+                      action: 'Reveal.toggleOverview();'
+                    },
+                    { icon: '<i class="fa fa-pen-square" style="color:#5DA8A3"></i>',
+                      title: 'Toggle chalkboard (B)',
+                      action: 'RevealChalkboard.toggleChalkboard();'
+                    },
+                    { icon: '<i class="fa fa-pen" style="color:#5DA8A3"></i>',
+                      title: 'Toggle notes canvas (C)',
+                      action: 'RevealChalkboard.toggleNotesCanvas();'
+                    }
+                ]
+              },
+
+              plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealSearch, RevealChalkboard, RevealZoom, RevealMath.KaTeX, RevealMenu, PdfExport, RevealChart ]
+          });
+        </script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49985752-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-49985752-2');
+</script>
+
+    </body>
+</html>

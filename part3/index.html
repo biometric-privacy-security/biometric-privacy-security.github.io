@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Part 3: Landscape of Privacy and Security Countermeasures</title>
+        <meta name="author" content="Vishnu Boddeti">
+
+        <link rel="stylesheet" href="../../assets/revealjs/dist/reset.css">
+        <link rel="stylesheet" href="../../assets/revealjs/dist/reveal.css">
+        <link rel="stylesheet" href="../../assets/revealjs/dist/theme/vishnu.css" id="theme">
+        <link rel="stylesheet" href="../../assets/revealjs/plugin/highlight/monokai.css" id="highlight-theme">
+
+        <!-- tikzjax -->
+        <link rel="stylesheet" type="text/css" href="../../assets/tikzjax/fonts.css">
+        <script src="../../assets/tikzjax/tikzjax.js"></script>
+
+        <!-- CDN for plotly and fontawesome -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://kit.fontawesome.com/7a9386c7a8.js" crossorigin="anonymous"></script>
+
+        <!-- Theme used for syntax highlighted code -->
+        <style>
+            .reveal code,
+            .reveal .formula-source,
+            .reveal a {
+                color: #3F988E;
+            }
+            .reveal code {
+                padding: 0 0.25em;
+            }
+            .reveal pre.formula-source {
+                box-shadow: none;
+                font-size: 0.8em;
+            }
+            .reveal .formula,
+            .reveal .formula-source {
+                margin: 2.5rem 0;
+            }
+            .reveal li {
+                margin: 0.65em 0;
+            }
+            .reveal .formula.bigger {
+                font-size: 1.8em;
+            }
+
+            /*https://medium.com/@mandieq/beautiful-presentations-from-markdown-who-knew-it-could-be-so-easy-d279aa7f787a*/
+
+            #left {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                float: left;
+                z-index:-10;
+                font-size: 0.85em;
+                line-height: 1.5;
+            }
+
+            #right {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                float: right;
+                z-index:-10;
+                font-size: 0.85em;
+                line-height: 1.5;
+            }
+
+            #center {
+                margin-left: auto;
+                margin-right: auto;
+                float: center;
+                text-align: center;
+                z-index:-10;
+                font-size: 0.85em;
+                line-height: 1.5;
+            }
+
+            #alert {
+                background-color: #ff9800;
+                padding: 10px;
+            }
+
+            #customers {
+              border-collapse: collapse;
+              width: 100%;
+            }
+            #customers td, #customers th {
+              border: 1px solid #ddd;
+              padding: 8px;
+            }
+            /*#customers tr:nth-child(even){background-color: #f2f2f2;}*/
+            #customers tr:hover {background-color: #000000;}
+            #customers th {
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: #4CAF50;
+              color: white;
+            }
+
+            #mytable {
+              border-collapse: collapse;
+              width: 100%;
+            }
+            #mytable td, #mytable th {
+              border: 1px solid #ddd;
+              padding: 8px;
+            }
+            /*#mytable tr:nth-child(even){background-color: #f2f2f2;}*/
+            #mytable tr:hover {background-color: #000000;}
+            #mytable th {
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              color: white;
+            }
+
+            .box {
+              width: 100%;
+              background-color: #333333;
+              border: 2px solid #ccc;
+              border-radius: 5px;
+              padding: 0px;
+              margin: 0px;
+              color:#eeeeec;
+            }
+          
+            .box-header {
+              background-color: #337ab7;
+              color: #fff;
+              padding: 5px;
+              border-radius: 5px 5px 0 0;
+            }
+
+            .red-box-header {
+              background-color: indianred;
+              color: #fff;
+              padding: 5px;
+              border-radius: 5px 5px 0 0;
+            }
+
+            .green-box-header {
+              background-color: #BAB86C;
+              color: black;
+              padding: 5px;
+              border-radius: 5px 5px 0 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+                <!-- Color ramp: ["#559EB1", "#6DB28B", "#8CBB68", "#AFBD4F", "#CFB541", "#E39B39", "#E56E30"] -->
+
+<!-- <section>
+    <p class="title" style="font-size: 50px;">Landscape of Privacy and Security Countermeasures and Open Problems</p>
+    <p class="subtitle"> IJCB Tutorial </p>
+    <p class="date">September 15, 2024</p>
+
+    <div id="left" style="width:50%;">
+        <img width=160 class="mr-3" src="/assets/images/organizers/cropped-amina-bassit.jpg">
+        <figcaption style="text-align: center;"> <a href="https://hal.cse.msu.edu">Amina Bassit</a></figcaption>
+    </div>
+    <div id="left" style="width:50%;">
+        <img width=160 class="mr-3" src="/assets/images/organizers/cropped-vishnu-boddeti.jpg">
+        <figcaption style="text-align: center;"> <a href="https://hal.cse.msu.edu">Vishnu Boddeti</a></figcaption>
+    </div>
+</section> -->
+
+<section data-background-iframe="../../../assets/viz/gradient/">
+    <p class="title" style="font-size: 50px;">Landscape of Privacy and Security Countermeasures and Open Problems</p>
+    <br>
+    <p class="author">Amina Bassit</p>
+    <p class="subtitle"> IJCB Tutorial </p>
+    <p class="date">September 15, 2024</p>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Each Countermeasure approaches the trade-offs differently</h2>
+    <div class="r-stack">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/tradeoffs-1.svg" width="65%">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/tradeoffs-2.svg" width="65%">
+        <img class="fragment" src="../assets/images/talks/part3/tradeoffs-3.svg" width="65%">
+    </div>
+</section>
+
+<!-- <section>
+    <h2 class="r-fit-text">Goals of Privacy and Security Countermeasures</h2>
+    <ul>
+        <ul>
+            <li>Protection of biometric templates due to the sensitive information they comprise</li>
+                <ul>
+                    <li>At rest (when stored), in transit (when sent), in use (when used).</li>    
+                </ul>
+            <li>Protection of the comparison scores as they can be used for recovering templates</li>
+            <li>Provable security against an adversarial model</li>
+            <li>Accountability of entities involved in the biometric recognition protocol</li>             
+        </ul>
+    </ul>
+</section> -->
+
+
+<section>
+    <h2 class="r-fit-text">Landscape of Existing Privacy and Security Countermeasures</h2>
+    <div class="r-stack">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/countermeasures-0.svg" width="80%">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/countermeasures-1.svg" width="80%">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/countermeasures-2.svg" width="80%">
+        <img class="fragment" src="../assets/images/talks/part3/countermeasures-3.svg" width="80%">
+    </div>
+</section>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Plot</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #plot {
+            width: 80%;
+            height: 80%;
+        }
+    </style>
+</head>
+
+
+
+<section>
+    <h2 class="r-fit-text">Controllable Privacy Filter in Face Recognition</h2>
+    <div class="r-stack" style="width:100%;">
+        <img src="../assets/images/talks/part3/filter-basedControllablePrivacy.svg" width="100%">     
+    </div>
+    <br>
+    <div id="center">
+        <ul id="center" style="font-size: 40%;"> <a href="">[RSV24] Controllable Privacy in Face Recognition: A Filter-based Approach</a></ul>
+    </div>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Controllable Privacy Filter in Face Recognition</h2>
+    <div id="left" style="width:40%;">
+        <img class="fragment" data-fragment-index="1" src="../assets/images/talks/part3/beforePP.png" width="60%">
+        <figcaption class="fragment" data-fragment-index="1" style="font-size: 70%;">Before privacy filter</figcaption>
+        <img class="fragment" data-fragment-index="2" src="../assets/images/talks/part3/afterPP.png" width="60%">
+        <figcaption class="fragment" data-fragment-index="2" style="font-size: 70%;">After privacy filter</figcaption>
+        <br>
+        <ul class="fragment" data-fragment-index="1" style="font-size: 40%;"> <a href="">[RSV24] Controllable Privacy in Face Recognition: A Filter-based Approach</a></ul>
+    </div>  
+    <div class="fragment" data-fragment-index="3" id="left" style="width:60%;">
+        <ul class="r-fit-text"> 
+            <ul> 
+                <li class="fragment" data-fragment-index="3">Modality: face</li>
+                <li class="fragment" data-fragment-index="4">Filter trained to control the amount of sensitive attributes to be remove</li>
+                <li class="fragment" data-fragment-index="5">Application of the filter is fast but does not apply security controls</li>     
+                <li class="fragment" data-fragment-index="6">Trade-off: 
+                    <ul>
+                        <li>$\nearrow$ <a style="color: #FF8000">accuracy</a> $\searrow$ <a style="color: #FF66C4;">privacy</a></li>
+                        <li>$\searrow$ <a style="color: #FF8000">accuracy</a> $\nearrow$ <a style="color: #FF66C4;">privacy</a></li>
+                    </ul> 
+            </ul>
+        </ul>
+        <img class="fragment" data-fragment-index="7" src="../assets/images/talks/part3/tradeoffs-CP.svg" width="35%">
+    </div>  
+</section>
+
+<section>
+    <h2 class="r-fit-text">Biometric template protection schemes</h2>
+    <br>
+    <div id="center" style="width:100%;">
+        <img src="../assets/images/talks/part3/BTPs.svg" width="60%">
+    </div>
+</section>
+
+
+
+
+<section>
+    <h2 class="r-fit-text">Bloom Filters-based biometric template protection scheme</h2>
+    <div id="left" style="width:50%;">
+        <img class="fragment" data-fragment-index="1" src="../assets/images/talks/part3/bloomfilters.png" width="100%">
+        <div id="center" style="width:100%;">
+            <img class="fragment" data-fragment-index="2" src="../assets/images/talks/part3/performanceBF.png" width="50%">
+            <img class="fragment" data-fragment-index="6" src="../assets/images/talks/part3/tradeoffs-BF.svg" width="45%">
+        </div>
+        <ul style="font-size: 40%;"><a href="https://www.sciencedirect.com/science/article/pii/S0020025516304753?casa_token=3ln-DK6MFGQAAAAA:Ap5azo2nTxT1eAKwDfKzPHSRBRPszaMd_h62kDC-4j5-_rXOW22qXKlTgovdevY6KwZbMNJTRmw">[GRG+16] Unlinkable and irreversible biometric template protection based on Bloom filters</a></ul>
+    </div>
+    <div id="right" style="width:50%;">
+        <ul class="r-fit-text"> 
+            <ul> 
+                <li class="fragment" data-fragment-index="1" >Modality: face</li>
+                <li class="fragment" data-fragment-index="1" >Row-wise shuffled features via user-specific permutations then BFs are generated</li>
+                <li class="fragment" data-fragment-index="3" >BF-based BTP is reversible <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10128708&casa_token=d9eFcYH9p8AAAAAA:_YjVdo1F76Ybm4z0FBHnmeNqU7sbYGh19jouA6n9HFNBvB83lKnRIi9qr24BcjefUQkAIgeQdIU&tag=1">[ZC+23]</a> and lead to the retrieval the template</li>
+                <li class="fragment" data-fragment-index="4" >Fast comparison</li>
+                <li class="fragment" data-fragment-index="5" >Trade-off: 
+                    <ul style="font-size: 90%;">
+                        <li>$\nearrow$ <a style="color: #FF8000">accuracy</a> $\searrow$ <a style="color: #FF66C4;">privacy</a> & <a style="color:aqua;">security</a></li>
+                        <li>$\searrow$ <a style="color: #FF8000">accuracy</a> $\nearrow$ <a style="color: #FF66C4;">privacy</a> & <a style="color:aqua;">security</a></li>
+                    </ul> 
+                </ul>
+        </ul>
+        <ul style="font-size: 40%;"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10128708&casa_token=d9eFcYH9p8AAAAAA:_YjVdo1F76Ybm4z0FBHnmeNqU7sbYGh19jouA6n9HFNBvB83lKnRIi9qr24BcjefUQkAIgeQdIU&tag=1">[ZC+23] Attacks and Improvement of Unlinkability of Biometric Template Protection Scheme Based on Bloom Filters</a></ul>
+    </div>
+</section>
+
+<section>
+    <h2 class="r-fit-text">PolyProtect biometric template protection scheme</h2>
+    <div id="left" style="width:60%;">
+        <img class="fragment" data-fragment-index="1" src="../assets/images/talks/part3/polyprotect.png" width="100%">
+        <div id="center" style="width:100%;">
+            <img class="fragment" data-fragment-index="2" src="../assets/images/talks/part3/perfPP.png" width="50%">
+            <img class="fragment" data-fragment-index="7" src="../assets/images/talks/part3/tradeoffs-PP.svg" width="45%">
+        </div>
+        <ul style="font-size: 40%;"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9670462&casa_token=CvlJHJ3rBNAAAAAA:tsODIFqZlmYVSCvC4418dwY_DFhEA2wxp-ElZkFOJqpqVYG1r80r7aLGZt3uVTA89i0SHtNmzSY&tag=1"> [HM22] Towards protecting face embeddings in mobile face verification scenarios.</a></ul>
+    </div>
+    <div id="left" style="width:40%; font-size: 75%;">
+        <ul style="font-size: 90%;"> 
+            <ul> 
+                <li class="fragment" data-fragment-index="1">Modality: face</li>
+                <li class="fragment" data-fragment-index="1">Uses multivariate polynomials over user-specific secrets (exponents and coefficients)</li>
+                <li class="fragment" data-fragment-index="3">High risk of reversibility for attackers accessing multiple templates of the same face.</li> 
+                <li class="fragment" data-fragment-index="4">Leaks soft biometric information <a href="https://arxiv.org/pdf/2404.16255">[YKR+24]</a></li> 
+                <li class="fragment" data-fragment-index="5">Fast comparison</li>
+                <li class="fragment" data-fragment-index="6">Trade-off: 
+                    <ul style="font-size: 90%;">
+                        <li>$\nearrow$ <a style="color: #FF8000">accuracy</a> $\searrow$ <a style="color: #FF66C4;">privacy</a> & <a style="color:aqua;">security</a></li>
+                        <li>$\searrow$ <a style="color: #FF8000">accuracy</a> $\nearrow$ <a style="color: #FF66C4;">privacy</a> & <a style="color:aqua;">security</a></li>
+                    </ul> 
+                </ul>
+            </ul>
+        </ul>
+    </div>
+</section>
+
+
+<section>
+    <h2 class="r-fit-text">Reflection on non-cryptographic Approaches</h2>
+    <ul> 
+        <ul> 
+            <li class="fragment">Fast because plaintext operations</li>
+            <li class="fragment">Suffer from reversibility issues</li>
+            <!-- <li>Unlinkability not optimal and affected by the transformation's randomness that is fixed per subject.</li> -->
+            <li class="fragment">Accuracy affected by the protection mechanism</li>
+            <ul class="fragment"> $\implies$ trade-off
+                <ul>
+                    <li class="fragment">$\nearrow$ <a style="color: #FF8000">accuracy</a> $\searrow$ <a style="color: #FF66C4;">privacy</a> & <a style="color:aqua;">security</a></li>
+                    <li class="fragment">$\searrow$ <a style="color: #FF8000">accuracy</a> $\nearrow$ <a style="color: #FF66C4;">privacy</a> & <a style="color:aqua;">security</a></li>
+                </ul> 
+            </ul>   
+        </ul>
+    </ul>
+</section>
+
+<section>
+    <h2 class="r-fit-text">The good news about Cryptographic Approaches</h2>
+    <br>
+    <br>
+    <blockquote class="fragment" style="border-radius: 10px;" >Accuracy is <a style="color: rgb(255,128,0);">preserved</a></blockquote>
+    <br>
+    <blockquote class="fragment" style="border-radius: 10px;">Privacy and security can be <a style="color: rgb(255,128,0);">enhanced independently</a> of accuracy</blockquote>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Secret sharing-based biometric template protection scheme</h2>
+    <div id="left" style="width:50%;">
+        <img class="fragment" data-fragment-index="1" src="../assets/images/talks/part3/secretSharing.png" width="90%">
+        <img class="fragment" data-fragment-index="2" src="../assets/images/talks/part3/perfSS.png" width="90%">
+        <ul style="font-size: 40%;"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9360881&casa_token=rGHmstMb4ZMAAAAA:Ny2wexqn-ftxW7mdjVRB7cDlro2K2ulCSrr5RhXngs6XX2MRY0QSi9TAILxV9_x7TCExNhezN64&tag=1">[BKD+20] Post-quantum secure two-party computation for iris biometric template protection</a></ul>
+    </div>
+    <div id="right" style="width:50%;">
+        <ul style="font-size: 90%;"> 
+            <ul> 
+                <li class="fragment" data-fragment-index="1">Modality: iris</li>
+                <li class="fragment" data-fragment-index="1">Reference and probe are split into shares between two non-colluding servers</li>
+                <li class="fragment" data-fragment-index="2">Accuracy preserved</li>
+                <li class="fragment" data-fragment-index="3">Privacy and security depend on the freshness of the shares</li>
+                <li class="fragment" data-fragment-index="4">Runs in <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9360881&casa_token=rGHmstMb4ZMAAAAA:Ny2wexqn-ftxW7mdjVRB7cDlro2K2ulCSrr5RhXngs6XX2MRY0QSi9TAILxV9_x7TCExNhezN64&tag=1">$502.9$ms</a></li>           
+            </ul>
+        </ul>
+        <img class="fragment" data-fragment-index="5" src="../assets/images/talks/part3/tradeoffs-SS.svg" width="50%">
+    </div>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Protection of sensitive information using Homomorphic Encryption</h2>
+    <br>
+    <br>
+    <div class="r-stack">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/Encryption-1-1.svg" width="100%">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/Encryption-1-2.svg" width="100%">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/Encryption-1-3.svg" width="100%">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/Encryption-1-4.svg" width="100%">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/Encryption-1.svg" width="100%">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/Encryption-2.svg" width="100%">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/Encryption-3.svg" width="100%">
+        <img class="fragment" src="../assets/images/talks/part3/Encryption-4.svg" width="100%">
+    </div>
+</section>
+
+
+
+
+<section>
+    <h2 class="r-fit-text">Inner product as a practical similarity measure under encryption</h2>
+    <div id="left" style="width:40%;">
+        <img src="../assets/images/talks/part3/cosineIP.svg" width="100%">
+    </div>
+    <div id="right" style="width:60%;font-size: 80%;">
+        <ul> 
+            <ul> 
+                <li>Cosine similarity: $$s(\mathbf{x},\mathbf{y}) = \frac{\mathbf{x}^T\mathbf{y}}{\|\mathbf{x}\|\|\mathbf{y}\|}$$</li>
+                <li>For normalized $\mathbf{\tilde{x}}$ and $\mathbf{\tilde{y}}$, cosine becomes inner product (IP): $$< \mathbf{\tilde{x}},\mathbf{\tilde{y}}> = \sum_{i=1}^{d} \tilde{x_i} \tilde{y_i}$$ </li>       
+            </ul>
+        </ul>
+        <blockquote class="fragment" data-fragment-index="1" style="border-radius: 10px;">IP requires $d$ multiplications and $d-1$ additions</blockquote>
+    </div>
+</section>
+
+
+
+
+
+<section>
+    <h3>Can we compute the inner product with <a style="color: rgb(255,128,0);">few</a> multiplications?</h3>
+</section>
+
+<section>
+    <h2 class="r-fit-text">SIMD property of of Fully homomorphic encryption (FHE)</h2>
+    <div class="r-stack">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/simd-1.svg" width="85%">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/simd-2.svg" width="85%">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/simd-3.svg" width="85%">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/simd-4.svg" width="85%">
+        <img class="fragment" src="../assets/images/talks/part3/simd-5.svg" width="85%">
+    </div>
+</section>
+
+
+<section>
+    <h2 class="r-fit-text">FHE-based BTP scheme with <a style="color: rgb(255,128,0);">one</a> homomorphic multiplication</h2>
+    <div id="left" style="width:50%;">
+        <figcaption class="fragment" data-fragment-index="1" style="font-size: 60%;">Enrollment Phase</figcaption>
+        <img class="fragment" data-fragment-index="1" src="../assets/images/talks/part3/secureFaceEnrollment.png" width="100%"> 
+        <figcaption class="fragment" data-fragment-index="2" style="font-size: 60%;">Verification Phase</figcaption> 
+        <img class="fragment" data-fragment-index="2" src="../assets/images/talks/part3/secureFace.png" width="100%">   
+        <figcaption class="fragment" data-fragment-index="3" style="font-size: 60%;">Inner Product Computation</figcaption> 
+        <img class="fragment" data-fragment-index="3" src="../assets/images/talks/part3/SecureFaceOperations.png" width="100%">        
+        <ul id="center" style="font-size: 40%;"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8698601&casa_token=MUyfCtuds9oAAAAA:4GFjGMtIsjocmdybdfu0jaxkPNP4xEsVl-Gl_UOhOqd8Y7Xbdg7ASJsDmZ5SWlQ7FXWNkdM-bJQ&tag=1">[B18] Secure face matching using fully homomorphic encryption</a></ul>
+    </div>
+    <div id="left" style="width:50%;">
+        <ul style="font-size: 70%;"> 
+            <ul> 
+                <li class="fragment" data-fragment-index="1">Modality: face (or any fixed-length representation)</li>  
+                <li class="fragment" data-fragment-index="3">Inner product over normalized vectors.</li>                
+                <li class="fragment" data-fragment-index="3">Precision-based quantization.</li> 
+                <li class="fragment" data-fragment-index="4">Provable privacy and security</li>   
+                <li class="fragment" data-fragment-index="5">Runs one-to-one comparison in $31.22$ ms</li>   
+                <li class="fragment" data-fragment-index="6">Operates in the <a style="color: rgb(255,128,0);">cleartext decision mode</a></li>  
+            </ul>
+        </ul>
+        <img class="fragment" data-fragment-index="7" src="../assets/images/talks/part3/tradeoffs-SF.svg" width="60%">
+    </div>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Decision Modes in biometric recognition under encryption</h2>
+    <div class="r-stack">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/decisionModes-generic-0.svg" width="90%">
+        <img class="fragment current-visible" src="../assets/images/talks/part3/decisionModes-generic-1.svg" width="90%">
+        <img class="fragment" src="../assets/images/talks/part3/decisionModes-generic-2.svg" width="90%">
+    </div>
+</section>
+
+<section>
+    <h3>Can we <a style="color: rgb(255,128,0);">free</a> the inner product from multiplication?</h3>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Pre-computed IP using a Lookup table-based comparator</h2>
+    <div id="center" style="width:100%;">
+        <img src="../assets/images/talks/part3/lookupTableBasedComp.svg" width="80%">
+        <blockquote style="border-radius: 10px;">Pre-computation to free IP from multiplication</blockquote>
+        <ul style="font-size: 40%;"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10347446">[BHV+23] Improved Multiplication-Free Biometric Recognition under Encryption</a></ul>
+    </div>    
+</section>
+
+<section>
+    <h2 class="r-fit-text">FHE-based BTP scheme with <a style="color: rgb(255,128,0);">zero</a> homomorphic multiplication</h2>
+    <div id="left" style="width:60%;">
+        <img class="fragment" data-fragment-index="1" src="../assets/images/talks/part3/mfipv2.svg" width="100%">
+        <img class="fragment" data-fragment-index="2" src="../assets/images/talks/part3/mfipv2-perf.png" width="60%">
+        <ul style="font-size: 40%;"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10347446">[BHV+23] Improved Multiplication-Free Biometric Recognition under Encryption</a></ul>
+    </div>
+    <div id="left" style="width:40%;">
+        <ul id="center" style="font-size: 70%;"> 
+            <ul> 
+                <li class="fragment" data-fragment-index="1">Modality: face (or any fixed-length representation)</li> 
+                <li class="fragment" data-fragment-index="2">Inner product over normalized vectors.</li>                
+                <li class="fragment" data-fragment-index="3">Table-based quantization.</li> 
+                <li class="fragment" data-fragment-index="4">Permutations improves accuracy.</li> 
+                <li class="fragment" data-fragment-index="5">Provable privacy and security</li>   
+                <li class="fragment" data-fragment-index="6">Runs one-to-one comparison in $16.94$ ms</li>       
+                <li class="fragment" data-fragment-index="7">Operates in the <a style="color: rgb(255,128,0);">cleartext and encrypted decision modes</a></li> 
+            </ul>
+        </ul>
+        <img class="fragment" data-fragment-index="8"src="../assets/images/talks/part3/tradeoffs-MFIPv2.svg" width="60%">
+</section>
+
+<section>
+    <h2 class="r-fit-text">Biometric verification decision Modes</h2>
+    <div id="center" style="width:100%;">
+        <img src="../assets/images/talks/part3/decisionModes.svg" width="100%">
+    </div>
+</section>
+
+
+
+<section>
+    <h2 class="r-fit-text">Summary of Biometric verification solutions w.r.t. the trade-offs</h2>
+    <div id="center" style="width:60%;">
+        <img src="../assets/images/talks/part3/tradeoffs-Summary.svg" width="100%">
+    </div>
+</section>
+
+
+
+
+<section>
+    <h2 class="r-fit-text">Protected Biometric Search Solutions in the Literature</h2>
+    <br>
+    <div id="center" style="width:100%;">
+        <img src="../assets/images/talks/part3/sota-Search.svg" width="100%">
+    </div>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Packing Approaches for Biometric Search</h2>
+    <ul id="center" style="font-size: 80%;">Analysis of the special case of #References = Ciphertext capacity</ul>
+    <div id="center" style="width:100%;">
+        <img src="../assets/images/talks/part3/packingApproaches.svg" width="80%">
+    </div>
+</section>
+
+<section>
+    <h3>Can we run biometric search under encryption with <a style="color: rgb(255,128,0);">few</a> multiplications?</h3>
+</section>
+
+<section>
+    <h2 style="font-size: 150%;"><a style="color: rgb(255,128,0);">Addition</a> of a Reference in HERS</h2>
+    <div id="center" style="width:90%;">
+        <img src="../assets/images/talks/part3/HERS-Addition-UnknownOffset.svg" width="100%">
+    </div>
+    <a style="font-size: 40%;" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9678986&casa_token=y33rj9oKjqIAAAAA:RyFr38E-SE43NkqYuG00M7dJWyB8GaA7OZ_rrGHLqj3G0ynIOccxVQtFFq_9_P4TNuwISk6biDw&tag=1">[EJB22] HERS: Homomorphically Encrypted Representation Search</a>
+</section>
+
+<section>
+    <h2 style="font-size: 150%;"><a style="color: rgb(255,128,0);">Search</a> of a probe in HERS</h2>
+    <div id="center" style="width:90%;">
+        <img src="../assets/images/talks/part3/HERS.svg" width="90%">
+    </div>
+    <a style="font-size: 40%;" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9678986&casa_token=y33rj9oKjqIAAAAA:RyFr38E-SE43NkqYuG00M7dJWyB8GaA7OZ_rrGHLqj3G0ynIOccxVQtFFq_9_P4TNuwISk6biDw&tag=1">[EJB22] HERS: Homomorphically Encrypted Representation Search</a>
+</section>
+
+
+<section>
+    <h3>Can we <a style="color: rgb(255,128,0);">free</a> biometric search under encryption from multiplication?</h3>
+</section>
+
+<section>
+    <h2 class="r-fit-text"><a style="color: rgb(255,128,0);">Addition</a> of a Reference in an MFIP-based search</h2>
+    <div id="center" style="width:100%;">
+        <img src="../assets/images/talks/part3/Addition-UnknownOffset.svg" width="100%">
+    </div>
+    <a style="font-size: 40%;" href="https://research.utwente.nl/en/publications/fast-and-accurate-biometric-search-under-encryption">[B23] Fast and accurate biometric search under encryption</a>
+</section>
+
+
+<section>
+    <h2 class="r-fit-text"><a style="color: rgb(255,128,0);">Search</a> of a probe in an MFIP-based search</h2>    
+    <div id="center" style="width:90%;">
+        <img src="../assets/images/talks/part3/search.svg" width="100%">
+    </div>
+    <a style="font-size: 40%;" href="https://research.utwente.nl/en/publications/fast-and-accurate-biometric-search-under-encryption">[B23] Fast and accurate biometric search under encryption</a>
+</section>
+
+
+<section>
+    <h2 class="r-fit-text">Summary of FHE-based Search solutions</h2>
+    <br>
+    <br>
+    <lu>Computational complexity $\mathcal{O}\left( K \cdot \left( \#\mathrm{M}_{\mathrm{HE}} + \#\mathrm{R}_{\mathrm{HE}} + \#\mathrm{A}_{\mathrm{HE}} \right) \right)$</lu>    
+    <div id="center" style="width:100%;">
+        <img src="../assets/images/talks/part3/complexityComp.svg" width="100%">
+    </div>
+</section>
+
+
+<section>
+    <h3>There is room for <a style="color: rgb(255,128,0);">improvement</a></h3>
+</section>
+
+<section>
+    <h2 class="r-fit-text">Efficient Search with Dimensionality Reduction</h2>
+    <img src="../assets/images/talks/part3/hers-schematic.svg" width="90%">
+    <ul><li><ul><li class="fragment", data-fragment-index="0">Build upon DeepMDS for dimensionality reduction.</li></ul></li></ul>
+    <img  class="fragment" data-fragment-index=0 src="../assets/images/talks/part3/deepmds-mapping.svg" width="90%">
+    <ul style="font-size:50%"><li class="fragment" data-fragment-index="0"><a href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Gong_On_the_Intrinsic_Dimensionality_of_Image_Representations_CVPR_2019_paper.pdf">[GBJ19] On the Intrinsic Dimensionality of Image Representations</a></li></ul>
+</section>
+
+
+
+<section>
+    <h2 class="r-fit-text">Effect of the dimensionality reduction on search runtime</h2>
+    <center><div id='myDiv1' style="width:100%;"></div></center>
+    <!-- <ul style="font-size: 40%;"></ul> -->
+
+        <script>
+        var xlabels = ["128", "192", "256", "512"];
+        var trace1 = {
+            type: 'bar',
+            x: xlabels,
+            y: [9.35, 14.55, 19.46, 38.37],
+            name: 'HERS',
+            marker: {
+                color: '#A2C8A2',
+            },
+            text: [9.35, 14.55, 19.46, 38.37],  
+            textposition: 'auto'  
+        };
+        var trace2 = {
+            type: 'bar',
+            x: xlabels,
+            y: [0.62, 0.88, 1.22139, 1.28],
+            name: 'MFIP-based search',
+            marker: {
+                color: '#C8A2C8'
+            },
+            text: [0.62, 0.88, 1.22, 1.28],  
+            textposition: 'auto' 
+        };
+
+        var data = [trace1, trace2];
+        
+        var config = {responsive: true, displaylogo: false};
+        
+        var layout = {
+            title: '(One-to-OneMillion) Search runtime measured on the same machine over 12 parallel cores for 128 bits security',
+            font: {size: 12, color: "#FFFFFF"},
+            plot_bgcolor:"#333333",
+            paper_bgcolor:"#333333",
+            yaxis: {
+                type: 'log',
+                autorange: true,
+                showline: true,
+                color: 'white',
+                mirror: true,
+                title: 'Seconds (s)',
+                tickvals: [0.1, 0.5, 1, 5, 10, 20, 40], 
+                gridcolor: 'rgba(255, 255, 255, 0.3)', 
+            },
+            xaxis: {
+                type: 'category',
+                showline: true,
+                color: 'white',
+                mirror: true,
+                tickvals: xlabels, 
+                ticktext: xlabels, 
+                tickmode: 'array', 
+                title: 'Dimension',
+            },
+            showlegend: true,
+            legend: {
+                orientation: 'h',
+                xanchor: 'right',
+                yanchor: 'bottom',
+                x: 1.00,
+                y: -0.2,
+            },
+            barmode: 'group'  
+        };        
+        Plotly.newPlot('myDiv1', data, layout, config);
+    </script>
+    
+</section>
+
+
+
+
+<section>
+    <h2 class="r-fit-text">Open Problem: End-to-end encrypted biometric recognition solution</h2>
+    <div id="center" style="width:100%;">
+        <blockquote style="border-radius: 10px; font-size: 75%;">AutoFHE shows that inference under encryption is feasible and demonstrates it on encrypted $32 \times 32$ images</span></blockquote>
+        <img src="../assets/images/talks/part3/autoFHE.png" width="70%">        
+        <ul id="center" style="font-size: 40%;"> <a href="https://www.usenix.org/system/files/sec23winter-prepub-559-ao.pdf">[AB23] AutoFHE: Automated adaption of CNNs for efficient evaluation over FHE</a></ul>
+    </div>
+</section>
+
+
+
+<section>
+    <h2 class="r-fit-text">Open Problem: Computation integrity check of biometrics under FHE</h2>
+    <div class="r-stack" style="width:100%;">  
+        <img class="fragment current-visible" data-fragment-index="0" src="../assets/images/talks/part3/FHE-problem-1.svg" width="80%"> 
+        <img class="fragment current-visible"  data-fragment-index="1" src="../assets/images/talks/part3/FHE-problem-2.svg" width="80%"> 
+        <img class="fragment current-visible"  data-fragment-index="2" src="../assets/images/talks/part3/FHE-problem-3.svg" width="80%">       
+        <img class="fragment" data-fragment-index="3" src="../assets/images/talks/part3/FHE-problem.svg" width="80%">   
+    </div>
+    <blockquote class="fragment" data-fragment-index="3" style="border-radius: 10px;">We trust <a style="font-weight: bold;color: rgb(255,128,0);">BUT we do not verify</a></span></blockquote> 
+    <a class="fragment" data-fragment-index="3" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9585508" style="font-size: 40%;">[BHV+21] Fast and accurate likelihood ratio-based biometric verification secure against malicious adversaries</a>
+</section>
+
+
+
+
+
+
+<section>
+    <h2 style="font-size: 200%;">Takeaways of this part</h2>
+    <div id="left" style="width:50%;">
+        <img class="fragment" data-fragment-index="0" src="../assets/images/talks/part3/tradeoffs-Summary.svg" width="60%">   
+        <img class="fragment" data-fragment-index="3" src="../assets/images/talks/part2/Security&Privacy-v2.svg" width="100%">      
+    </div>
+    <div id="right" style="width:50%;font-size: 80%;">
+        <ul>
+            <ul>
+                <li class="fragment" data-fragment-index="0">No solution is perfect</li> 
+                <li class="fragment" data-fragment-index="1">State-of-the-art solutions protect biometric data after feature extraction</li>  
+                <li class="fragment" data-fragment-index="2">Open problems</li>
+                <ul>
+                    <li class="fragment" data-fragment-index="3">End-to-end protected biometric recognition (inference and training)</li>                      
+                    <li class="fragment" data-fragment-index="4">Computation integrity check of biometrics under encryption</li> 
+                    <li class="fragment" data-fragment-index="4">Trust-but-verify principle in protected biometric systems</li> 
+                </ul>           
+            </ul>
+        </ul>
+    </div>
+</section>
+
+
+            </div>
+        </div>
+        
+        <script src="../../assets/revealjs/dist/reveal.js"></script>
+        <script src="../../assets/revealjs/plugin/notes/notes.js"></script>
+        <script src="../../assets/revealjs/plugin/markdown/markdown.js"></script>
+        <script src="../../assets/revealjs/plugin/highlight/highlight.js"></script>        
+        <script src="../../assets/revealjs/plugin/search/search.js"></script>
+        <script src="../../assets/revealjs/plugin/zoom/zoom.js"></script>
+        <script src="../../assets/revealjs/plugin/math/math.js"></script>
+        
+        <script src="../../assets/revealjs/plugin/menu/menu.js"></script>        
+        <script src="../../assets/revealjs/plugin/pdfexport/pdfexport.js"></script>
+
+        <!-- chalkboard -->
+        <link rel="stylesheet" href="../../assets/revealjs/plugin/chalkboard/style.css">
+        <script src="../../assets/revealjs/plugin/chalkboard/plugin.js"></script>
+
+        <!-- customcontrols -->
+        <link rel="stylesheet" href="../../assets/revealjs/plugin/customcontrols/style.css">
+        <script src="../../assets/revealjs/plugin/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins/menu/font-awesome/css/fontawesome.css">
+
+        <!-- chart -->
+        <script src="../../assets/revealjs/plugin/chart/Chart.min.js"></script>
+        <script src="../../assets/revealjs/plugin/chart/plugin.js"></script>
+
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins/menu/font-awesome/css/fontawesome.css">
+
+        <script>
+          Reveal.initialize({
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              mouseWheel: true,
+              hash: true,
+              autoPlayMedia: true,
+              transition: 'fade',
+              touch: true,
+
+              katex: {
+                version: 'latest',
+                delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+               ],
+               ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+              },
+
+              chalkboard: {
+                  src: "",
+                  eraser: { src: path + 'img/sponge.png', radius: 20},
+                boardmarkers : [
+                        { color: 'rgba(255,220,0,1)', cursor: 'url(' + path + 'img/boardmarker-yellow.png), auto'},
+                        { color: 'rgba(30,144,255, 1)', cursor: 'url(' + path + 'img/boardmarker-blue.png), auto'},
+                        { color: 'rgba(220,20,60,1)', cursor: 'url(' + path + 'img/boardmarker-red.png), auto'},
+                        { color: 'rgba(50,205,50,1)', cursor: 'url(' + path + 'img/boardmarker-green.png), auto'},
+                        { color: 'rgba(255,140,0,1)', cursor: 'url(' + path + 'img/boardmarker-orange.png), auto'},
+                        { color: 'rgba(100,100,100,1)', cursor: 'url(' + path + 'img/boardmarker-black.png), auto'},
+                        { color: 'rgba(150,0,20150,1)', cursor: 'url(' + path + 'img/boardmarker-purple.png), auto'}
+                ],
+                chalks: [
+                        { color: 'rgba(255,255,255,0.5)', cursor: 'url(' + path + 'img/chalk-white.png), auto'},
+                        { color: 'rgba(96, 154, 244, 0.5)', cursor: 'url(' + path + 'img/chalk-blue.png), auto'},
+                        { color: 'rgba(237, 20, 28, 0.5)', cursor: 'url(' + path + 'img/chalk-red.png), auto'},
+                        { color: 'rgba(20, 237, 28, 0.5)', cursor: 'url(' + path + 'img/chalk-green.png), auto'},
+                        { color: 'rgba(220, 133, 41, 0.5)', cursor: 'url(' + path + 'img/chalk-orange.png), auto'},
+                        { color: 'rgba(220,0,220,0.5)', cursor: 'url(' + path + 'img/chalk-purple.png), auto'},
+                        { color: 'rgba(255,220,0,0.5)', cursor: 'url(' + path + 'img/chalk-yellow.png), auto'}
+                ]
+              },
+
+              chart: {
+                defaults: {
+                  global: {
+                    title: { fontColor: "#FFF" },
+                    legend: {
+                      labels: { fontColor: "#FFF" },
+                    },
+                  },
+                  scale: {
+                    scaleLabel: { fontColor: "#FFF" },
+                    gridLines: { color: "#FFF", zeroLineColor: "#FFF" },
+                    ticks: { fontColor: "#FFF" },
+                  }
+                },
+                line: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ], "borderDash": [ [5,10], [0,0] ]},
+                bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]},
+                pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+                radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]},
+              },
+
+              customcontrols: {
+                controls: [
+                    {
+                      id: 'toggle-overview',
+                      title: 'Toggle overview (O)',
+                      icon: '<i class="fa fa-th" style="color:#5DA8A3"></i>',
+                      action: 'Reveal.toggleOverview();'
+                    },
+                    { icon: '<i class="fa fa-pen-square" style="color:#5DA8A3"></i>',
+                      title: 'Toggle chalkboard (B)',
+                      action: 'RevealChalkboard.toggleChalkboard();'
+                    },
+                    { icon: '<i class="fa fa-pen" style="color:#5DA8A3"></i>',
+                      title: 'Toggle notes canvas (C)',
+                      action: 'RevealChalkboard.toggleNotesCanvas();'
+                    }
+                ]
+              },
+
+              plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealSearch, RevealChalkboard, RevealZoom, RevealMath.KaTeX, RevealMenu, PdfExport, RevealChart ]
+          });
+        </script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49985752-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-49985752-2');
+</script>
+
+    </body>
+</html>
